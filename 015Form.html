@@ -85,13 +85,13 @@ button:hover {
 
             <form action="">
                 <label>Student Name:</label><br>
-                <input type="text" name="student_name" required><br><br>
+                <input type="text" name="student_name" required minlength="2" maxlength="15"><br><br>
 
                 <label>Email:</label><br>
-                <input type="email" name="email" required><br><br>
+                <input type="email" name="email" required minlength="10" maxlength="20"><br><br>
 
                 <label>Password:</label><br>
-                <input type="password" name="password" required><br><br>
+                <input type="password" name="password" required minlength="6" maxlength="6"><br><br>
 
                 <label>Course Selection:</label><br>
                 <select required>
