@@ -6,97 +6,107 @@
     <title>Feedback Form</title>
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f4f8;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+       body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f4f8;
+    margin: 0;
+}
 
-         header {
-            text-align: center;
-            margin-top: 20px;
-        }
+header {
+    text-align: center;
+    padding: 15px 0 5px; /* reduced padding */
+}
 
-        .card {
-            background-color: #ffffff;
-            width: 350px;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
 
-        .card h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #333;
-        }
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* controls gap between header & card */
+}
 
-        label {
-            font-weight: bold;
-            color: #555;
-        }
+.card {
+    background-color: #ffffff;
+    width: 350px;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
 
-        input, textarea {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 14px;
-        }
+.card h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
 
-        textarea {
-            resize: none;
-        }
+label {
+    font-weight: bold;
+    color: #555;
+}
 
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #4a6cf7;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
+input, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
 
-        button:hover {
-            background-color: #3b5be0;
-        }
+textarea {
+    resize: none;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4a6cf7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #3b5be0;
+}
+
     </style>
 </head>
 
 <body>
 
-
-     <header>
+    <header>
         <h1>Module 6: Form</h1>
     </header>
 
-    <div class="card">
-        <h2>Feedback Form</h2>
+    <div class="container">
+        <div class="card">
+            <h2>Feedback Form</h2>
 
-        <form>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name"
-                   minlength="2" maxlength="50"
-                   placeholder="Write your full name" required>
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name"
+                       minlength="2" maxlength="50"
+                       placeholder="Write your full name" required>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email"
-                   placeholder="Write your email here" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email"
+                       placeholder="Write your email here" required>
 
-            <label for="message">Message:</label>
-            <textarea id="message" name="message"
-                      placeholder="Write feedback here"
-                      rows="4" required></textarea>
+                <label for="message">Message:</label>
+                <textarea id="message" name="message"
+                          placeholder="Write feedback here"
+                          rows="4" required></textarea>
 
-            <button type="submit">Submit</button>
-        </form>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
     </div>
 
 </body>
