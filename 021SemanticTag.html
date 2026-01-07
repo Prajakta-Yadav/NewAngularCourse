@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Audio & Video Page</title>
+
+    <!-- Internal CSS -->
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        .media-box {
+            background-color: white;
+            padding: 20px;
+            margin: 20px auto;
+            width: 500px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Audio & Video Page</h1>
+    </header>
+
+    <main>
+        <!-- Audio Section -->
+        <div class="media-box">
+            <h2>Audio Player</h2>
+            <audio controls>
+                <source src="Images/sample-15s.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+
+        <!-- Video Section -->
+        <div class="media-box">
+            <h2>Video Player</h2>
+            <video controls width="400">
+                <source src="Images/DOM PRACTICE 2.mp4" type="video/mp4">
+                Your browser does not support the video element.
+            </video>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Media Page</p>
+    </footer>
+
+</body>
+</html>

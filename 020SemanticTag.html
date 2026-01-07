@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semantic Tag | Blog Page</title>
+
+    <!-- Internal CSS -->
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        header {
+            background-color: #3f51b5;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        nav ul li:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+        }
+
+        section {
+            background-color: white;
+            padding: 25px;
+            max-width: 800px;
+            border-radius: 6px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        article {
+            font-size: 16px;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        footer {
+            background-color: #3f51b5;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Blog Page</h1>
+        <nav>
+            <ul>
+                <li>About</li>
+                <li>Topic</li>
+                <li>Dashboard</li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <article>
+                <h2>Why Semantic HTML Is Important</h2>
+                <p>
+                    Semantic HTML refers to the use of HTML tags that clearly describe
+                    the meaning and purpose of the content. Instead of using generic
+                    tags like <code>&lt;div&gt;</code>, semantic tags such as
+                    <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>,
+                    <code>&lt;article&gt;</code>, and <code>&lt;footer&gt;</code>
+                    provide a clear structure to a webpage.
+                </p>
+
+                <p>
+                    Using semantic tags improves website accessibility by helping
+                    screen readers understand the layout and navigate content easily.
+                    It also helps search engines better interpret the content, which
+                    improves SEO and page ranking.
+                </p>
+
+                <p>
+                    In modern web development, semantic HTML is considered a best
+                    practice because it creates cleaner code, better user experience,
+                    and more maintainable websites.
+                </p>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <h2>&copy; Prajakta Yadav</h2>
+    </footer>
+
+</body>
+</html>

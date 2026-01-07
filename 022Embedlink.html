@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>iFrame Example</title>
+
+    <!-- Internal CSS -->
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+
+        header {
+            background-color: #1e1e1e;
+            color: white;
+            padding: 20px;
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        .video-box {
+            background-color: white;
+            padding: 20px;
+            width: 600px;
+            margin: auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        iframe {
+            border-radius: 6px;
+        }
+
+        footer {
+            background-color: #1e1e1e;
+            color: white;
+            padding: 10px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>YouTube Video Using iframe</h1>
+    </header>
+
+    <main>
+        <div class="video-box">
+            <!-- iframe is used to embed external content like videos or maps inside a webpage -->
+           <iframe width="560" 
+           height="315" src="https://www.youtube.com/embed/7pqaSFCgDCc?si=j0T9xUBy_2x6OwNW" title="YouTube video player" 
+           frameborder="0" 
+           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+           referrerpolicy="strict-origin-when-cross-origin" 
+           allowfullscreen></iframe>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 iframe Example</p>
+    </footer>
+
+</body>
+</html>
