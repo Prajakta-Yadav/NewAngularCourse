@@ -1,0 +1,21 @@
+body{
+    background-color: rgb(185, 235, 218);
+}
+
+
+header{
+    background-color: bisque;
+
+}
+
+h1{
+    padding: 15px;
+    font-size: 20px;
+    text-align: center;
+    color: blueviolet;
+}
+
+p{
+    font-size: 18px;
+    color: blue;
+}
