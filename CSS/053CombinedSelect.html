@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Combined Selector Program</title>
+
+    <style>
+        /* ID Selector */
+        #mainTitle {
+            text-align: center;
+            color: darkblue;
+        }
+
+        /* Class Selector */
+        .content {
+            font-size: 16px;
+            color: black;
+        }
+
+        /* Pseudo-class */
+        .content:hover {
+            color: green;
+        }
+
+        /* Pseudo-element */
+        .content::first-letter {
+            font-size: 30px;
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="mainTitle">CSS Combined Selectors Demo</h1>
+
+    <p class="content">
+        This paragraph demonstrates class selector, id selector,
+        pseudo-class, and pseudo-element in one program.
+    </p>
+
+</body>
+</html>

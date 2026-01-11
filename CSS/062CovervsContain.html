@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cover vs Contain</title>
+
+    <style>
+        .container {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .box {
+            width: 300px;
+            height: 180px;
+            border: 2px solid #333;
+            background-image: url("https://images.unsplash.com/photo-1503264116251-35a269479413");
+            background-repeat: no-repeat;
+            background-position: center;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-shadow: 1px 1px 3px #000;
+        }
+
+        .cover {
+            background-size: cover;
+        }
+
+        .contain {
+            background-size: contain;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="box cover">Cover</div>
+        <div class="box contain">Contain</div>
+    </div>
+
+</body>
+</html>

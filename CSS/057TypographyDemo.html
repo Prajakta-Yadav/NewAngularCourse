@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>em vs rem Demo</title>
+
+    <style>
+        html {
+            font-size: 16px;
+        }
+
+        .parent {
+            font-size: 20px;
+            border: 2px solid #333;
+            padding: 20px;
+            margin: 30px;
+        }
+
+        .em-text {
+            font-size: 2em;   /* 40px */
+            color: blue;
+        }
+
+        .rem-text {
+            font-size: 2rem;  /* 32px */
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="parent">
+        <p class="em-text">This text uses 2em (based on parent size)</p>
+        <p class="rem-text">This text uses 2rem (based on root size)</p>
+    </div>
+
+</body>
+</html>

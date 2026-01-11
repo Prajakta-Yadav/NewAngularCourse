@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Background Position</title>
+
+    <style>
+        .container {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .box {
+            width: 220px;
+            height: 140px;
+            border: 2px solid #333;
+            background-image: url("https://via.placeholder.com/60");
+            background-repeat: no-repeat;
+        }
+
+        .top-left {
+            background-position: top left;
+        }
+
+        .center {
+            background-position: center;
+        }
+
+        .bottom-right {
+            background-position: bottom right;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="box top-left">Top Left</div>
+        <div class="box center">Center</div>
+        <div class="box bottom-right">Bottom Right</div>
+    </div>
+
+</body>
+</html>

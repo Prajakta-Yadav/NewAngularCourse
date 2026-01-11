@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RGBA Overlay Banner</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .hero {
+            height: 100vh;
+            background-image: url("https://images.unsplash.com/photo-1503264116251-35a269479413");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .overlay-text {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .overlay-text h1 {
+            margin: 0 0 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="overlay-text">
+            <h1>Welcome to Our Website</h1>
+            <p>RGBA overlay improves text readability on images</p>
+        </div>
+    </section>
+
+</body>
+</html>

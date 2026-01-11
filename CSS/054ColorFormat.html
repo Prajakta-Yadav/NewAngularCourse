@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Color Format Cards</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 40px;
+        }
+
+        .card {
+            width: 180px;
+            height: 120px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+
+        /* HEX Color */
+        .hex {
+            background-color: #3498db;
+        }
+
+        /* RGB Color */
+        .rgb {
+            background-color: rgb(52, 152, 219);
+        }
+
+        /* RGBA Color with opacity */
+        .rgba {
+            background-color: rgba(52, 152, 219, 0.6);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card hex">HEX Color</div>
+    <div class="card rgb">RGB Color</div>
+    <div class="card rgba">RGBA Color</div>
+
+</body>
+</html>

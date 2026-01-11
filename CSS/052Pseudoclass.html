@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pseudo-element</title>
+
+    <style>
+        /* First letter styling */
+        p::first-letter {
+            font-size: 32px;
+            color: red;
+            font-weight: bold;
+        }
+
+        /* Add content before paragraph */
+        p::before {
+            content: "Note: ";
+            color: blue;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <p>
+        CSS pseudo-elements allow you to style specific parts of an element.
+    </p>
+
+</body>
+</html>
