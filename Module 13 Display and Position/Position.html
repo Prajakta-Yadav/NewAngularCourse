@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body{
+            background-color: rgb(233, 182, 117);
+        }
+
+        header{
+            text-align: center;
+            background-color: aquamarine;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            z-index: 1;
+        }
+
+        nav ul li{
+            list-style: none;
+        }
+
+        .box1{
+           position: absolute;
+           background-color: rgb(40, 10, 212);
+           height: 300px;
+           width: 300px;
+           z-index: -1;
+           
+        }
+
+        #header{
+            color: rgb(18, 143, 210);
+            font-weight: bold;
+        }
+
+        .box2{
+            position: absolute;
+            z-index: 1;
+            width: 300px;
+            height: 300px;
+            background-color: black;
+            opacity: 0.5    ;
+        }
+
+        .title{
+            background-color: aliceblue;
+            margin-top: 110px;
+            margin-left: 320px;
+            margin-right: 30px;
+            margin-bottom: 10px;
+            position: absolute;
+            border-radius: 15px;
+            text-align: center;
+            padding-left: 29%;
+            padding-right: 29%;
+
+        }
+        .box3{
+            margin-top: 180px;
+            margin-left: 310px;
+            margin-right: 30px;
+            position: absolute;
+            border-radius: 15px;
+            background-color: aliceblue;
+
+        }
+    </style>
+</head>
+<body>
+    <header><h1>Hello, I am Header</h1>
+    
+    <nav>
+        <ul><li>Home</li>
+        </ul>
+    </nav></header>
+
+
+    <main>
+        <div class="box1"> 
+
+            <h3 id="header">Hello, I am Box 1</h3>
+        </div>
+            <div class="box2">
+
+            </div>
+
+            <div class="title"><h2>Position, Z-index, & Opacity</h2></div>
+                <div class="box3">
+
+                    <p><ul>
+                        <li>Above Program I have used position, z-index, and opacity property.</li>
+                        <li>Two div box has same position value absolute is used.</li>
+                        <li>Box1 background-color is blue and z-index value is -1</li>
+                        <li>Box2 background-color is black and z-index value is 1 </li>
+                        <li class="sublist">Opacity:
+                            <ul>
+                                <li>We use opacity property for controls the transparency of an element.</li>
+                                <li>Opacity property range values are between 0 to 1</li>
+                                <li>0 is full transparent</li>
+                                <li>1 is fully visible</li>
+                            </ul>
+
+                        <li>position:
+                            <ul>
+                                <li>We use position property for define how an element is positioned in the document. </li>
+                                <li>Above Program I have used position values is absolute which has take positioned relative to nearest positioned ancestor. </li>
+                                <li>Total five values are position property: static, relative, absolute, fixed, sticky.</li>
+                            </ul>
+
+                        <li>Z-index:
+                            <ul>
+                                <li>We use z-index for controls stacking order of overlapping elements.</li>
+                                <li>It's works only on positioned elements</li>
+                                <li>Higher value appears on top</li>
+                                <li>z-index property values can be negative.</li>
+                            </ul>
+                            <br>
+                        <li>Now, We understand Opacity, Position, And Z-index property.</li>
+                        <li>According to the above program, we use Box1 Z-index value is -1 and background-color blue. Box2 Z-index value is 1 which is greater than -1. So, Box2 element is appers on top. Box2 background-color is black.</li>
+                        <li>At the end, we see one more thing Box2 element background-color is balck. right? but here box2 element is not fully visible because we use opacity value 0.5 for the box2 element. and that's why the box2 element is not fully visible, and we see Box1 and Header element.</li>
+                        </li>
+                        </li>
+                        </li>
+                     </ul></p>
+                </div>
+           
+    </main>
+</body>
+</html>
