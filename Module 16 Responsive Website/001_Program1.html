@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body { margin: 0; font-family: Arial; }
+
+.header, .content, .footer {
+  padding: 20px;
+  text-align: center;
+}
+
+.header { background: #4CAF50; color: white; }
+.content { background: #f4f4f4; }
+.footer { background: #333; color: white; }
+
+/* Tablet */
+@media (max-width: 768px) {
+  .content { font-size: 18px; }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .content { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">Header</div>
+<div class="content">Responsive Content Area</div>
+<div class="footer">Footer</div>
+
+</body>
+</html>

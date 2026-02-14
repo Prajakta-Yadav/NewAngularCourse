@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.progress {
+  width: 300px;
+  background: lightgray;
+}
+
+.bar {
+  width: 0;
+  height: 20px;
+  background: green;
+  animation: load 3s forwards;
+}
+
+@keyframes load {
+  to { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress">
+  <div class="bar"></div>
+</div>
+
+</body>
+</html>

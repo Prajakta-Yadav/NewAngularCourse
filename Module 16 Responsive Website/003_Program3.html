@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.container {
+  display: flex;
+}
+.column {
+  flex: 1;
+  padding: 20px;
+  background: lightblue;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .container {
+    flex-direction: column;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="column">Column 1</div>
+  <div class="column">Column 2</div>
+</div>
+
+</body>
+</html>

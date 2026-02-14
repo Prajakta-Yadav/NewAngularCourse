@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.box {
+  width: 100px;
+  height: 100px;
+  background: red;
+  position: relative;
+  animation: combo 4s infinite alternate;
+}
+
+@keyframes combo {
+  0% {
+    left: 0;
+    transform: rotate(0);
+    background: red;
+  }
+  100% {
+    left: 300px;
+    transform: rotate(360deg);
+    background: blue;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="box"></div>
+
+</body>
+</html>
