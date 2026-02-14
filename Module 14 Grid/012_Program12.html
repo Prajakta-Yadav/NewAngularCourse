@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Responsive Blog Layout</title>
+<style>
+.container {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+.main {
+  background: lightblue;
+  padding: 20px;
+}
+
+.sidebar {
+  background: lightgray;
+  padding: 20px;
+}
+
+@media(max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+<h2>Responsive Blog Layout</h2>
+
+<div class="container">
+  <div class="main">
+    <h3>Blog Post</h3>
+    <p>Main blog content goes here...</p>
+  </div>
+  <div class="sidebar">
+    <h3>Sidebar</h3>
+    <p>Categories / Links</p>
+  </div>
+</div>
+
+</body>
+</html>

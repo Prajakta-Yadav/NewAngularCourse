@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Full Screen Grid</title>
+<style>
+.container {
+  display: grid;
+  height: 100vh;
+  grid-template-rows: 1fr 1fr;
+}
+
+.section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  color: white;
+}
+
+.top {
+  background: teal;
+}
+
+.bottom {
+  background: purple;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="section top">Top Section</div>
+  <div class="section bottom">Bottom Section</div>
+</div>
+
+</body>
+</html>

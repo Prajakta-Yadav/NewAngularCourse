@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.flex {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.flex div { background: lightblue; padding: 20px; width: 45%; }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.grid div { background: lightgreen; padding: 20px; }
+</style>
+</head>
+<body>
+
+<h3>Flexbox</h3>
+<div class="flex">
+  <div>Item 1</div>
+  <div>Item 2</div>
+</div>
+
+<h3>Grid</h3>
+<div class="grid">
+  <div>Item 1</div>
+  <div>Item 2</div>
+</div>
+
+</body>
+</html>

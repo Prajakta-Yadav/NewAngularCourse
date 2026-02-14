@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Named Grid Lines</title>
+<style>
+.container {
+  display: grid;
+  grid-template-columns: [start] 1fr [middle] 1fr [end];
+  gap: 10px;
+  padding: 20px;
+}
+
+.item1 {
+  grid-column: start / middle;
+  background: lightgreen;
+  padding: 20px;
+}
+
+.item2 {
+  grid-column: middle / end;
+  background: lightcoral;
+  padding: 20px;
+}
+</style>
+</head>
+<body>
+
+<h2>Grid with Named Lines</h2>
+
+<div class="container">
+  <div class="item1">Left Section</div>
+  <div class="item2">Right Section</div>
+</div>
+
+</body>
+</html>

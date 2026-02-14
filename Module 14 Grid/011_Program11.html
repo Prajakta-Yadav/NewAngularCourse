@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Masonry Layout</title>
+<style>
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 100px;
+  gap: 10px;
+  padding: 20px;
+}
+
+.card {
+  background: lightyellow;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+.tall {
+  grid-row: span 2;
+}
+</style>
+</head>
+<body>
+
+<h2>Masonry Style Grid</h2>
+
+<div class="container">
+  <div class="card">Card 1</div>
+  <div class="card tall">Card 2 (Tall)</div>
+  <div class="card">Card 3</div>
+  <div class="card tall">Card 4 (Tall)</div>
+  <div class="card">Card 5</div>
+</div>
+
+</body>
+</html>

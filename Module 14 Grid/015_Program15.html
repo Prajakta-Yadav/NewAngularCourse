@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Flexbox vs Grid</title>
+<style>
+/* Flexbox Layout */
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  background: lightblue;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.flex-item {
+  background: white;
+  padding: 20px;
+  width: 45%;
+  text-align: center;
+}
+
+/* Grid Layout */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  background: lightgreen;
+  padding: 20px;
+}
+
+.grid-item {
+  background: white;
+  padding: 20px;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+
+<h2>Flexbox Layout</h2>
+<div class="flex-container">
+  <div class="flex-item">Item 1</div>
+  <div class="flex-item">Item 2</div>
+</div>
+
+<h2>Grid Layout</h2>
+<div class="grid-container">
+  <div class="grid-item">Item 1</div>
+  <div class="grid-item">Item 2</div>
+</div>
+
+</body>
+</html>

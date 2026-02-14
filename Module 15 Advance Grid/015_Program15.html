@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.container {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 20px;
+}
+.main { background: lightblue; padding: 20px; }
+.sidebar { background: lightgray; padding: 20px; }
+
+@media(max-width: 768px){
+  .container { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="main">
+    <h2>Blog Article</h2>
+    <p>Article content...</p>
+  </div>
+  <div class="sidebar">
+    <h3>Sidebar</h3>
+  </div>
+</div>
+
+</body>
+</html>

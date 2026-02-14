@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.outer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+.box { background: lightgreen; padding: 20px; }
+</style>
+</head>
+<body>
+
+<div class="outer">
+  <div class="box">Left</div>
+  <div class="inner">
+    <div class="box">A</div>
+    <div class="box">B</div>
+  </div>
+</div>
+
+</body>
+</html>
