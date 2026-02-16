@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+@media(max-width:768px){
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+}
+.box {
+  padding: 20px;
+  color: white;
+}
+</style>
+
+</head>
+<body>
+    <div class="grid-container">
+  <div class="box" style="background:blue;">Box 1</div>
+  <div class="box" style="background:green;">Box 2</div>
+</div>
+
+</body>
+</html>
