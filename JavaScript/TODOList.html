@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Todo List</h2>
+
+    <input type="text" id="task">
+    <button onclick="addTask()">Add</button>
+
+    <ul id="list"></ul>
+
+    <script>
+        let task = [];
+        function addTask(){
+            let taskText = document.getElementById("task").value;
+             clear();
+            if(taskText === ""){
+                return;
+            }
+            let now = new Date();
+           ok = now.getTime();
+            let taskObj = {id:ok ,name: taskText};
+
+            task.push(taskObj);
+            
+            displayTasks();
+        }
+
+        function displayTasks(){
+            let ul = document.getElementById("list");
+
+            ul.innerHTML = "";
+            task.forEach((obj)=>{
+                let li = document.createElement("li");
+                li.innerText = obj.id + " : " + obj.name;
+
+                ul.appendChild(li);
+            });
+        }
+
+        function clear(){
+            document.getElementById("task").value = "";
+        }
+    </script>
+</body>
+</html>

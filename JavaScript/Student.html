@@ -1,0 +1,163 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>College Data Add Form</title>
+
+    <style>
+
+        body{
+            background-color: aliceblue;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        button:hover{
+            background-color: rgb(36, 36, 202);
+        }
+        #dialog{
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 40%;
+            transform: translate(-50%,-50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px solid black;
+            box-shadow: 0 0 10px rgb(133, 127, 127);
+        }
+
+        .container{
+            width: 600px;
+            /* height: 600px; */
+            margin: 50px auto;
+            background-color: rgb(213, 220, 227);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgb(133, 128, 128);
+        }
+        h2{
+            text-align: center;
+        }
+
+        input,select{
+            width: 100%;
+            padding: 10px;
+            margin-top: 4px;
+            margin-bottom: 8px;
+        }
+        span{
+            color: red;
+            font-size: 12px;
+        }
+
+        button{
+            width: 100%;
+            padding: 10px;
+            color: white;
+            background-color: blue;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Add User</h2>
+
+      <form id="userForm">
+        <label>Full Name</label>
+        <input type="text" id="name" />
+        <span id="nameError"></span>
+
+        <label>Email</label>
+        <input type="email" id="email" />
+        <span id="emailError"></span>
+
+        <label>Age</label>
+        <input type="number" id="age" />
+        <span id="ageError"></span>
+
+        <label>Role</label>
+        <select id="role">
+          <option>Select Role</option>
+          <option>Student</option>
+          <option>Teacher</option>
+          <option>Clark</option>
+        </select>
+        <span id="roleError"></span>
+
+        <br /><br />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+
+    <div id="dialog">
+        <h3>User Details</h3>
+        <p id="dialogContent"></p>
+
+        <button onclick="closeDialogue()">Close</button>
+    </div>
+
+    <script>
+        document.getElementById("userForm").addEventListener("submit",function(e){
+            e.preventDefault();
+
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let age = document.getElementById("age").value;
+            let role = document.getElementById("role").value;
+
+           document.getElementById("nameError").innerText = "";
+           document.getElementById("emailError").innerText = "";
+           document.getElementById("ageError").innerText = "";
+           document.getElementById("roleError").innerText = "";
+
+           //validations
+
+           let valid = true;
+
+           if(name === ""){
+            document.getElementById("nameError").innerText = "Name is Required";
+            valid = false;
+           }
+            if(email === ""){
+            document.getElementById("emailError").innerText = "Email is Required";
+            valid = false;
+           }
+            if(age === ""){
+            document.getElementById("ageError").innerText = "Age is Required";
+            valid = false;
+           }
+           if(role === ""){
+            document.getElementById("ageError").innerText = "Role is Required";
+            valid = false;
+           }
+
+           if(valid){
+            document.getElementById("dialogContent").innerHTML = 
+            "Name :" +name + "<br>" +
+            "Email :" +email + "<br>"+
+              "Age :" +age + "<br>"+
+                "Role :" +role ;
+
+            document.getElementById("dialog").style.display = "block";
+
+           }
+        })
+
+        function closeDialogue(){
+            document.getElementById("dialog").style.display = "none";
+            clearForm();
+
+        }
+        function clearForm(){
+            document.getElementById("name").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("age").value = "";
+            document.getElementById("role").selectedIndex = 0;
+        }
+    </script>
+  </body>
+</html>
