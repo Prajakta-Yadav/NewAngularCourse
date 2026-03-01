@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="clas">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse voluptas aliquam veritatis repellat
+        minus praesentium pariatur. Similique, id inventore voluptatem veritatis pariatur accusantium assumenda odio
+        quasi, cumque, unde quae laboriosam.</div>
+    <div class="clas">Hello </div>
+    <div class="clas">World</div>
+    <h1 class="clas">Hello</h1>
+    <p class="clas">World</p>
+    <h1 class="item">Hello World</h1>
+    <button onclick="confirm('Hello')">Click Me</button>
+     <h1 id="hello">Hello World </h1>
+
+    <script>
+      
+      let param = document.querySelectorAll(".clas");
+         let convertedParas = Array.from(param);
+
+        convertedParas.forEach((el,el2)=>{
+            el.style.background = "pink";
+            el.style.color = "white";
+        });
+    </script>
+</body>
+
+</html>
