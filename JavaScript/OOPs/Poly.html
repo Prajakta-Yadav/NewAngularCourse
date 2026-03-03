@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Animal Makes Sound</h1>
+
+    <button onclick="makeSound(dog)">Dog</button>
+    <button onclick="makeSound(cat)">Cat</button>
+    <p id="output"></p>
+
+    <script>
+        //parent or base
+        class Animal{
+            speak(){
+                return "Animal Makes Soung";
+            }
+        }
+        //child
+        class Dog extends Animal{
+            speak(){
+                return "Dog Barks";
+            }
+        }
+         //child
+        class Cat extends Animal{
+            speak(){
+                return "Cat Meow";
+            }
+        }
+        let dog = new Dog();
+        let cat = new Cat();
+
+        function makeSound(animal){
+            document.getElementById("output").innerText = 
+            animal.speak();
+        }
+    </script>
+</body>
+</html>

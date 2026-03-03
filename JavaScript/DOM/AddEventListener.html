@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">Click Me</button>
+    <p id="out" ></p>
+
+    <script>
+
+        const btns = document.getElementById("btn");
+        const par = document.getElementById("out");
+
+        btns.addEventListener("dblclick",fun);
+        btns.addEventListener("click",fun2);
+
+        function fun(){
+            par.textContent = "Double event Clicked";
+        };
+
+         function fun2(){
+            par.textContent = "Click event clicked";
+        };
+
+    </script>
+</body>
+</html>

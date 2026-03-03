@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" id="amount" placeholder="Enter Amount">
+    <button onclick="deposite()">Deposite</button>
+
+    <p id="balance"></p>
+
+    <script>
+        class Bankaccount{
+            #balance;
+            constructor(balance){
+                this.#balance = balance;
+            }
+            deposite(amount){
+                if(amount>0){
+                    this.#balance +=  amount;
+                }
+            }
+
+            getBalance(){
+                return this.#balance;
+            }
+        }
+        let account = new Bankaccount(1000);
+
+        function deposite(){
+            let amt = document.getElementById("amount").value;
+            account.deposite(Number(amt));
+ 
+            document.getElementById("balance").innerText = 
+            "Balance : "+ account.getBalance();
+        }
+    </script>
+</body>
+</html>

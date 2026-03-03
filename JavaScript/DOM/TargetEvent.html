@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn" style="padding: 15px; border: 2px solid blue;">
+        <span id="inner"  style="padding: 15px; border: 2px solid rgb(166, 166, 177);">Click on inner text</span>
+    </button>
+
+
+    <pre id="log"></pre>
+    <script>
+         const log = (msg)=>{
+                document.querySelector("#log").textContent = msg;
+        }
+
+        document.querySelector("#btn").addEventListener("click",(e)=>{
+            log(
+                "target = " + e.target.tagName + " | Current Target = " + e.currentTarget.tagName
+            );
+        });
+
+    </script>
+</body>
+</html>

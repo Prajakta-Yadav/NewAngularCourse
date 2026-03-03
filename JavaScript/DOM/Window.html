@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="b">Window size</button>
+
+    <p id="out"></p>
+
+    <script>
+        document.getElementById("b").addEventListener("click",()=>{
+            document.getElementById("out").textContent = 
+            "Width : " + window.innerWidth + " Height : " +window.innerHeight;
+             if(window.innerWidth <= 600){
+             document.getElementById("out").textContent = 
+           "Contact Our Organization content Cannot be viewed on your viewport"
+        }
+        });
+       
+    </script>
+</body>
+</html>

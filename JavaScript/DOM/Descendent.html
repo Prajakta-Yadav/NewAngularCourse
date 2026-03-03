@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2 class="hello">Hello Tag Selector Accessing Query selector</h2>
+    <h2 class="hello">hello world</h2>
+    <p class="hello">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse officiis assumenda veniam in ut nemo voluptatibus molestiae temporibus quisquam mollitia, exercitationem vel asperiores recusandae commodi similique amet sed ducimus et!</p>
+    <div class="parent">
+        <p class="hello">Lorem ipsum dolor sit amet consectetur.</p>
+    </div>
+    <div class="parent">
+        <p class="child">Lorem ipsum dolor sit amet.</p>
+        <p class="child">Lorem ipsum dolor sit amet.</p>
+        <h1>Hello</h1>
+    </div>
+    <script>
+        const el = document.querySelectorAll(".parent  .child");
+        el.forEach((param)=>{
+            param.style.background = "navy";
+        })
+    </script>
+</body>
+</html>

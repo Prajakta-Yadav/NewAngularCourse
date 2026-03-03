@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2 class="hello">Hello Tag Selector Accessing Query selector</h2>
+    <h2 class="hello">hello world</h2>
+    <p class="hello">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse officiis assumenda veniam in ut nemo voluptatibus molestiae temporibus quisquam mollitia, exercitationem vel asperiores recusandae commodi similique amet sed ducimus et!</p>
+    <div class="hello">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam enim quis iste beatae ad odit ea facere accusamus tempore asperiores. Rerum vero soluta sed sapiente labore, fugiat iusto libero omnis.</div>
+    <script>
+        const el = document.querySelectorAll(".hello");
+        el.forEach((param)=>{
+            param.style.background = "pink";
+        })
+    </script>
+</body>
+</html>

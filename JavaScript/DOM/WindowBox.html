@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="a">Alert</button>
+    <button id="c">Confirm</button>
+    <button id="p">Prompt</button>
+
+    <p id="out"></p>
+
+    <script>
+        const out = document.querySelector("#out");
+
+        document.getElementById("a").onclick = ()=>{alert("Hello")};
+
+
+        document.getElementById("c").onclick = ()=>{
+            const ok = confirm("Continue ?");
+            out.textContent = ok ? "User Said Yes !!" : "User Said No .."; 
+        };
+        document.getElementById("p").onclick = ()=>{
+            const name = prompt("Enter Your Name ?");
+
+            out.textContent = name ? "Hi " + name : "Cancelled";
+        };
+    </script>
+</body>
+</html>

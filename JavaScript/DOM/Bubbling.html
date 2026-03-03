@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <div class="superparent" style="padding: 20px; border: 2px solid rgb(198, 8, 8);">
+     <div id="parent" style="padding: 16px; border: 2px solid black;">
+        Parent
+        <button id="child">Child Button</button>
+    </div>
+   </div>
+    <pre id="log"></pre>
+    <script>
+        const log = (msg)=>{
+                document.querySelector("#log").textContent += msg +"\n";
+        }
+
+        document.querySelector("#parent").addEventListener("click",(parentVar)=>{
+            log("Parent Listener Fired");
+            parentVar.stopPropagation();
+        })
+        document.querySelector("#child").addEventListener("click",(param)=>{
+            log("Child Listener Fired");
+            param.stopPropagation();
+        })
+        document.querySelector(".superparent").addEventListener("click",(superVar)=>{
+            log("Super parent Listener Fired");
+            superVar.stopPropagation();
+        })
+
+    </script>
+</body>
+</html>

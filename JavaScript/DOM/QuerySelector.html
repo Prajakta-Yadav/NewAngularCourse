@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae, voluptate!</p>
+    <p>Consequatur ut commodi ipsum sunt alias odio animi praesentium eligendi.</p>
+    <p>Dolorum excepturi recusandae enim dignissimos a sed nihil, et illo?</p>
+
+    <h1>Hello</h1>
+    <h1>Good</h1>
+    <h2>Fork </h2>
+    <h3>Infosystems</h3>
+
+
+    <script>
+        document.querySelector("h1").style.background = "pink";
+
+        document.querySelectorAll("p").forEach((el,ind,arr)=>{
+            el.style.background = "purple";
+            // el.innerHTML = "<h1></h1>"
+            el.innerText = "Hello World"
+                console.log(el,ind,arr);
+        })
+    </script>
+</body>
+</html>

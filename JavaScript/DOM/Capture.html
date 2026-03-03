@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Capture Event</h1>
+
+    <div id="outer" style="padding: 20px; border: 2px dotted red;">
+        outer
+    <div id="inner" style="margin-top: 10px; padding: 20px; border: 2px solid blue;">
+        inner
+        <button id="btn">Click</button>
+    </div>
+    </div>
+
+    <pre id="log"></pre>
+
+    <script>
+         const log = (msg)=>{
+                document.querySelector("#log").textContent += msg +"\n";
+        }
+
+        //capturing event
+
+        // document.getElementById("outer").addEventListener("click",()=>{log("Outer Capture")},{capture:true});
+        // document.getElementById("inner").addEventListener("click",()=>{log("Inner Capture")},{capture:true});
+
+        //Bubbling listeners
+
+        document.getElementById("outer").addEventListener("click",()=>{log("Outer Bubble")});
+        document.getElementById("inner").addEventListener("click",()=>{log("Inner Bubble")});
+
+        //target
+
+                document.getElementById("btn").addEventListener("click",()=>{log("Button Target")});
+
+    </script>
+</body>
+</html>

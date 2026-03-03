@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <select name="" id="city">
+        <option >Select City</option>
+        <option >pune</option>
+        <option >Karad</option>
+        <option >Satara</option>
+    </select>
+
+    <p id="out"></p>
+    <script>
+        const par = document.getElementById("out");
+        const sel = document.getElementById("city");
+
+        sel.addEventListener("change",(e)=>{
+            par.textContent = "You selected : " + e.target.value;
+        });
+    </script>
+</body>
+</html>
