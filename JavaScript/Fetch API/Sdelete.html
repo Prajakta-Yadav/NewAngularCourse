@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="studentList"></ul>
+
+    <script>
+        async function getStudents() {
+            let response = await fetch("http://localhost:3000/students");
+            let students = await response.json();
+
+            let list = document.getElementById("studentList");
+            list.innerHTML = "";
+
+            students.forEach((student) =>{
+                let li = document.createElement("li");
+                li.textContent = student.name + " - " + student.Course;
+
+                let btn = document.createElement("button");
+                btn.textContent = "Delete";
+
+                btn.onclick = async function () {
+                    await fetch("http://localhost:3000/students/" + student.id ,{
+                        method: "DELETE"
+                    });
+                    getStudents();
+
+                };
+
+                li.appendChild(btn);
+                list.appendChild(li);
+            });
+        }
+
+        getStudents();
+        
+    </script>
+</body>
+</html>

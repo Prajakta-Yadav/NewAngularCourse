@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO List</title>
+
+    <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+    <header>
+        <h1>TODO List</h1>
+        <pre>                                                             Your Digital Daily Routine Recorder...</pre>
+    </header>
+
+    <main>
+        <section class="Container">
+            <form action="Post" class="card-item">
+
+                <h2>Add User Task</h2>
+
+
+                <label for="name">Task Name: </label><br>
+                <input type="text" id="taskName" placeholder="Enter Your Task"> <br><br>
+
+                <label for="date">Deadline</label><br>
+                <input type="datetime" id="date" placeholder="Selete Completion Date"><br>
+
+                <label for="Priority">Select Task Priority</label><br>
+                <select name="Priority" id="priority">
+                    <option value="select">Select Priority</option>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </select> <br>
+
+                <button type="button" onclick="addTask()">Add Task</button>
+                <button type="button">Delete Task</button>
+                <button type="button">Complete Task</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="Script.js"></script>
+</body>
+</html>

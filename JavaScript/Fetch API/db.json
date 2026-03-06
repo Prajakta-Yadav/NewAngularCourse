@@ -1,0 +1,26 @@
+{
+  "students": [
+    {
+      "id": 1,
+      "name": "Prajakta",
+      "Course": "CSE"
+    },
+    {
+      "id": 2,
+      "name": "Prachi",
+      "Course": "IT"
+    }
+  ],
+  "login": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "A123"
+    },
+    {
+      "id": 1,
+      "username": "Supervisor",
+      "password": "A123"
+    }
+  ]
+}

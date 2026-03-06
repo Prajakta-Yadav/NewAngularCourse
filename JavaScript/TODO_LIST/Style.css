@@ -1,0 +1,51 @@
+body{
+    text-align: center;
+    background-color: rgb(194, 189, 164);
+}
+
+header{
+    background-color:bisque;
+    padding-bottom: 10px;
+    padding-top: 5px;
+    margin: 0%;
+    width: 100%;
+}
+
+h1{
+    font-weight: bold;
+    font-family:'Times New Roman', Times, serif;
+    font-style:oblique;
+    font-size:xx-large;
+    margin-bottom: 0;
+}
+
+pre{
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: oblique;
+    direction: ltr;
+}
+
+.Container{ 
+
+            width: 70vh;
+            margin-left: 35%;
+            height: auto;
+            padding-top: 5px;
+            padding-bottom: 25px;            
+            margin-top: 35px;
+            background-color: rgb(98, 170, 241);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgb(133, 128, 128);
+            
+}
+
+input, select, option{
+            width: 70%;
+            padding: 10px;
+            margin-top: 4px;
+            margin-bottom: 8px;
+}
+
+button:hover{
+            background-color: rgb(36, 36, 202);
+        }
