@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script>
+
+function addNumbers(){
+
+    let num1 = Number(document.getElementById("n1").value);
+    let num2 = Number(document.getElementById("n2").value);
+
+    let result = num1 + num2;
+    
+    document.getElementById("result").innerHTML = "Result: " + result;
+}
+
+function subNumbers(){
+    let num1 = Number(document.getElementById("n1").value);
+let num2 = Number(document.getElementById("n2").value);
+    let result2 = num1 - num2;
+    
+document.getElementById("result").innerHTML = "Result: " + result2;
+}
+
+function mulNumbers(){
+    let num1 = Number(document.getElementById("n1").value);
+let num2 = Number(document.getElementById("n2").value);
+    let result3 = num1 * num2;
+    
+document.getElementById("result").innerHTML = "Result: " + result3;
+}
+
+function divNumbers(){
+    let num1 = Number(document.getElementById("n1").value);
+let num2 = Number(document.getElementById("n2").value);
+    let result4 = num1 / num2;
+    
+document.getElementById("result").innerHTML = "Result: " + result4;
+}
+
+function modNumbers(){
+    let num1 = Number(document.getElementById("n1").value);
+let num2 = Number(document.getElementById("n2").value);
+    let result5 = num1 % num2;
+    
+    document.getElementById("result").innerHTML = "Result: " + result5;
+}
+
+
+
+</script>
+</head>
+
+
+<body>
+<input type="number" id="n1">
+<input type="number" id="n2">
+<button onclick="addNumbers()">Add</button>
+<button onclick="subNumbers()">Sub</button>
+<button onclick="mulNumbers()">Mul</button>
+<button onclick="divNumbers()">Div</button>
+<button onclick="modNumbers()">Mod</button>
+
+<p id="result">  </p>
+
+
+</body>
+</html>

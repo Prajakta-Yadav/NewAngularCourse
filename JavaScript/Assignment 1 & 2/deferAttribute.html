@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!--If we declare script file in head tag we need to use defer attribute. 
+    If we declare script file before closing body tag its work without defer attribute similar work. 
+    defer attribute load script file in background and run it after html tag work/ parsing
+    
+    1. run after html parsing
+    2. maintains order
+    3. DOM dependent scripts -->
+
+    <!--External JS -->
+
+    <script src="script.js" defer ></script>
+
+</head>
+<body>
+<h1 id="title">Hello</h1>
+
+<button id="btn1">Click Me</button>
+
+<h1>Welcome to JavaScript Demo</h1>
+<button id="btn">Click Me</button>
+
+
+
+
+</body>
+</html>

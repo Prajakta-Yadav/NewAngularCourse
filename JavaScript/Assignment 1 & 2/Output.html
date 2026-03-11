@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    
+</head>
+<body>
+
+    <!--Inline script-->
+
+    <button onclick="alert('Hello From inline JS')">Click Me</button> <br>
+
+    <p id="title">Hello</p> <br><hr>
+
+    <p id="title1">Hello</p> <br><hr>
+
+
+ <!--Internal Script-->
+    
+    <script>
+        alert("Hello using Alert");
+
+        console.log("Hello using Console");
+
+        document.write("Hello using Document Write");
+   
+        const title = document.getElementById("title").innerHTML = "Hello World";
+
+        const el = document.getElementById("title1");
+        el.style.background = "red";
+
+    </script>
+</body>
+</html>

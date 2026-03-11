@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<!--Script inside <head>  shows error because DOM elements are not loaded yet.
+     html code load after script that why demo id is not accesible for js compiler.  -->
+    <script>
+        document.getElementById("demo").innerHTML ="Hello";
+    </script>
+
+
+</head>
+<body>
+    
+    <p id="demo"></p>
+<!--Always use script tag before closing body tag place. 
+script code start execution after loading whole html code. -->
+
+    <script>
+        document.getElementById("demo").innerHTML ="Hello";
+    </script>
+</body>
+</html>
