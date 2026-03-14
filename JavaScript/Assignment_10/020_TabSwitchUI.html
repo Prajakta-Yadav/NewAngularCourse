@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <button onclick="show1()">Tab1</button>
+    <button onclick="show2()">Tab2</button>
+    <div id="tab1">Content 1</div>
+    <div id="tab2" style="display:none;">Content 2</div>
+
+<script>
+    function show1(){
+        document.getElementById("tab1").style.display="block";
+        document.getElementById("tab2").style.display="none";
+    }
+
+    function show2(){
+    document.getElementById("tab1").style.display="none";
+    document.getElementById("tab2").style.display="block";
+    }
+
+    </script>
+</body>
+</html>

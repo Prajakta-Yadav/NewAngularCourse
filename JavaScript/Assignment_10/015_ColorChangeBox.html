@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <input type="text" id="color">
+    <div id="box" style="width:200px;height:100px;"></div>
+    <button onclick="change()">Change Color</button>
+
+    <script>
+        function change(){
+            let c = document.getElementById("color").value;
+            document.getElementById("box").style.background = c;
+        }
+
+    </script>
+</body>
+</html>

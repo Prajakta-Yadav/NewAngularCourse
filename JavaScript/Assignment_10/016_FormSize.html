@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <p id="text">Sample Text</p>
+    <button onclick="increase()">Increase</button>
+    <button onclick="decrease()">Decrease</button>
+
+    <script>
+        let size=16;
+        function increase(){
+        size+=2;
+        document.getElementById("text").style.fontSize=size+"px";
+    }
+
+    function decrease(){
+        size-=2;
+        document.getElementById("text").style.fontSize=size+"px";
+    }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <p class="text">One</p>
+    <p class="text">Two</p>
+    <p class="text">Three</p>
+    <button onclick="changeColor()">Change</button>
+
+    <script>
+
+        function changeColor(){
+            let items = document.querySelectorAll(".text");
+            items.forEach(function(i){
+            i.style.color="green";
+        });
+    }
+    
+    </script>
+</body>
+</html>

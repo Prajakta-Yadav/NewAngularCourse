@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <textarea id="text" maxlength="100"></textarea>
+    <p id="count">100</p>
+
+
+    <script>
+        let textarea=document.getElementById("text");
+        textarea.addEventListener("input",function(){
+        let remaining=100-this.value.length;
+        document.getElementById("count").textContent=remaining;
+    
+    });
+
+    </script>
+</body>
+</html>
