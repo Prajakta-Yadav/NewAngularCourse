@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form id="form">
+<input type="text" id="name" placeholder="Enter Name">
+<p id="nameError" style="color:red;"></p>
+<button type="submit">Submit</button>
+</form>
+<script>
+document.getElementById("form").addEventListener("submit", function(e) {
+e.preventDefault();
+let name = document.getElementById("name").value.trim();
+if (name === "") {
+document.getElementById("nameError").textContent = "Name field is required";
+} else {
+document.getElementById("nameError").textContent = "";
+}
+});
+</script>
+</body>
+</html>

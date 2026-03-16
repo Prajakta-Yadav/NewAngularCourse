@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form id="loginForm">
+<input type="text" id="username" placeholder="Username"><br><br>
+<input type="password" id="password" placeholder="Password"><br><br>
+<button type="submit">Login</button>
+</form>
+<p id="result"></p>
+<script>
+document.getElementById("loginForm").addEventListener("submit", function(e) {
+e.preventDefault();
+let username = document.getElementById("username").value;
+let password = document.getElementById("password").value;
+if (username === "admin" && password === "1234") {
+document.getElementById("result").textContent = "Login Successful";
+} else {
+document.getElementById("result").textContent = "Invalid Credentials";
+}
+});
+</script>
+</body>
+</html>

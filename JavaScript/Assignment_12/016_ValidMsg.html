@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form id="form">
+<input type="text" id="name" placeholder="Enter Name">
+<button type="submit">Submit</button>
+</form>
+<p id="message"></p>
+<script>
+document.getElementById("form").addEventListener("submit", function(e) {
+e.preventDefault();
+let name = document.getElementById("name").value.trim();
+if (name !== "") {
+document.getElementById("message").style.color = "green";
+document.getElementById("message").textContent = "Form validated successfully";
+}
+});
+</script>
+</body>
+</html>

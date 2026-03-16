@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <input type="text" id="name" placeholder="Name"><br><br>
+<input type="text" id="email" placeholder="Email"><br><br>
+<input type="text" id="phone" placeholder="Phone"><br><br>
+<input type="password" id="password" placeholder="Password"><br><br>
+<input type="password" id="confirmPassword" placeholder="Confirm
+Password"><br><br>
+<label><input type="radio" name="gender" value="Male"> Male</label>
+<label><input type="radio" name="gender" value="Female"> Female</label>
+<br><br>
+<label><input type="checkbox" id="terms"> Accept Terms</label>
+<br><br>
+<button type="submit">Register</button>
+</form>
+<p id="result" style="color:red;"></p>
+<script>
+document.getElementById("regForm").addEventListener("submit", function(e) {
+e.preventDefault();
+let name = document.getElementById("name").value.trim();
+let email = document.getElementById("email").value.trim();
+let phone = document.getElementById("phone").value.trim();
+let password = document.getElementById("password").value;
+let confirmPassword = document.getElementById("confirmPassword").value;
+let terms = document.getElementById("terms").checked;
+let genders = document.getElementsByName("gender");
+let genderSelected = false;
+for (let gender of genders) {
+if (gender.checked) {
+genderSelected = true;
+}
+}
+if (name === "" || email === "" || phone === "" || password === "" || confirmPassword ===
+"") {
+document.getElementById("result").textContent = "All fields are required";
+} else if (!(email.includes("@") && email.includes("."))) {
+document.getElementById("result").textContent = "Invalid email format";
+} else if (isNaN(phone)) {
+document.getElementById("result").textContent = "Phone must be numeric";
+} else if (password.length < 8) {
+document.getElementById("result").textContent = "Password must be at least 8 characters";
+} else if (password !== confirmPassword) {
+document.getElementById("result").textContent = "Passwords do not match";
+} else if (!genderSelected) {
+document.getElementById("result").textContent = "Please select gender";
+} else if (!terms) {
+document.getElementById("result").textContent = "Please accept terms";
+} else {
+document.getElementById("result").style.color = "green";
+document.getElementById("result").textContent = "Registration successful";
+}
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form id="emailForm">
+<input type="text" id="email" placeholder="Enter Email">
+<button type="submit">Validate</button>
+</form>
+<p id="result"></p>
+<script>
+document.getElementById("emailForm").addEventListener("submit", function(e) {
+e.preventDefault();
+let email = document.getElementById("email").value;
+if (email.includes("@") && email.includes(".")) {
+document.getElementById("result").textContent = "Valid Email";
+} else {
+document.getElementById("result").textContent = "Invalid Email";
+}
+});
+</script>
+</body>
+</html>

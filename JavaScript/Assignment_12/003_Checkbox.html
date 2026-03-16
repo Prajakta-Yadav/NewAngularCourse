@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form id="hobbyForm">
+<label><input type="checkbox" name="hobby" value="Reading"> Reading</label>
+<label><input type="checkbox" name="hobby" value="Coding"> Coding</label>
+<label><input type="checkbox" name="hobby" value="Music"> Music</label>
+<br><br>
+<button type="submit">Submit</button>
+</form>
+<p id="result"></p>
+<script>
+document.getElementById("hobbyForm").addEventListener("submit", function(e) {
+e.preventDefault();
+let hobbies = document.getElementsByName("hobby");
+let selected = [];
+hobbies.forEach(function(hobby) {
+if (hobby.checked) {
+selected.push(hobby.value);
+}
+});
+document.getElementById("result").textContent = "Selected Hobbies: " + selected.join(",");
+});
+</script>
+</body>
+</html>

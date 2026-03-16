@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <input type="text" id="email" placeholder="Enter Email">
+<p id="error" style="color:red;"></p>
+
+<script>
+document.getElementById("email").addEventListener("keyup", function() {
+let email = this.value.trim();
+if (email === "") {
+document.getElementById("error").textContent = "Email is required";
+} else {
+document.getElementById("error").textContent = "";
+}
+});
+</script>
+</body>
+</html>

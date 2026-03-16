@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form id="ageForm">
+<input type="number" id="age" placeholder="Enter Age">
+<button type="submit">Submit</button>
+</form>
+<p id="result"></p>
+<script>
+document.getElementById("ageForm").addEventListener("submit", function(e) {
+e.preventDefault();
+let age = Number(document.getElementById("age").value);
+if (age > 18) {
+document.getElementById("result").textContent = "Eligible";
+} else {
+document.getElementById("result").textContent = "Age must be greater than 18";
+}
+});
+</script>
+</body>
+</html>

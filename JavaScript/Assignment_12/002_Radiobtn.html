@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form id="genderForm">
+<label><input type="radio" name="gender" value="Male"> Male</label>
+<label><input type="radio" name="gender" value="Female"> Female</label>
+<label><input type="radio" name="gender" value="Other"> Other</label>
+<br><br>
+<button type="submit">Submit</button>
+</form>
+<p id="result"></p>
+<script>
+document.getElementById("genderForm").addEventListener("submit", function(e) {
+e.preventDefault();
+let genders = document.getElementsByName("gender");
+let selectedGender = "";
+for (let gender of genders) {
+if (gender.checked) {
+selectedGender = gender.value;
+}
+}
+document.getElementById("result").textContent = "Selected Gender: " + selectedGender;
+});
+</script>
+</body>
+</html>

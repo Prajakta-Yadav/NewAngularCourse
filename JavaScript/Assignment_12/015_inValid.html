@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form id="form">
+<input type="text" id="name" placeholder="Enter Name">
+<button type="submit">Submit</button>
+</form>
+<script>
+document.getElementById("form").addEventListener("submit", function(e) {
+e.preventDefault();
+let nameInput = document.getElementById("name");
+if (nameInput.value.trim() === "") {
+nameInput.style.border = "2px solid red";
+} else {
+nameInput.style.border = "2px solid green";
+}
+});
+</script>
+</body>
+</html>

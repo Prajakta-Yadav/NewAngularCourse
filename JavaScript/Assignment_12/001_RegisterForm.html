@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="regForm">
+
+        <input type="text" id="name" placeholder="Enter Name"><br><br>
+
+        <input type="email" id="email" placeholder="Enter Email"><br><br>
+
+        <input type="password" id="password" placeholder="Enter Password"><br><br>
+
+        <button type="submit">Submit</button>
+</form>
+
+    <h3>Entered Values:</h3>
+    <p id="output"></p>
+<script>
+
+    document.getElementById("regForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    document.getElementById("output").innerHTML =
+    "Name: " + name + "<br>Email: " + email + "<br>Password: " + password;
+});
+
+</script>
+</body>
+</html>

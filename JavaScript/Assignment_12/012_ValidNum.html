@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form id="phoneForm">
+<input type="text" id="phone" placeholder="Enter phone number">
+<button type="submit">Validate</button>
+</form>
+<p id="result"></p>
+<script>
+document.getElementById("phoneForm").addEventListener("submit", function(e) {
+e.preventDefault();
+let phone = document.getElementById("phone").value;
+if (!isNaN(phone) && phone !== "") {
+document.getElementById("result").textContent = "Valid Numeric Input";
+} else {
+document.getElementById("result").textContent = "Only numbers are allowed";
+}
+});
+</script>
+</body>
+</html>

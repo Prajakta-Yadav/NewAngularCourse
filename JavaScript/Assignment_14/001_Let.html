@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Block Scope using let</title>
+</head>
+<body>
+
+    <script>
+        if (true) {
+            let a = 10;
+            var b = 20;
+            console.log("Inside block let:", a);
+            console.log("Inside block var:", b);
+        }
+    
+        console.log("Outside block var:", b);
+
+        console.log("Outside block let:", a); // Error
+</script>
+</body>
+</html>

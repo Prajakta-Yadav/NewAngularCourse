@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <style>
+.step {
+display: none;
+}
+.active {
+display: block;
+}
+</style>
+</head>
+<body>
+
+<div id="step1" class="step active">
+<input type="text" id="name" placeholder="Enter Name">
+
+<button id="next1">Next</button>
+<p id="error1" style="color:red;"></p>
+</div>
+
+<div id="step2" class="step">
+<input type="email" id="email" placeholder="Enter Email">
+<button id="next2">Next</button>
+<p id="error2" style="color:red;"></p>
+</div>
+
+<div id="step3" class="step">
+<input type="password" id="password" placeholder="Enter Password">
+<button id="submitBtn">Submit</button>
+<p id="error3" style="color:red;"></p>
+</div>
+
+<script>
+document.getElementById("next1").addEventListener("click", function() {
+let name = document.getElementById("name").value.trim();
+if (name === "") {
+document.getElementById("error1").textContent = "Name is required";
+} else {
+document.getElementById("step1").classList.remove("active");
+document.getElementById("step2").classList.add("active");
+}
+});
+document.getElementById("next2").addEventListener("click", function() {
+let email = document.getElementById("email").value.trim();
+if (email === "") {
+document.getElementById("error2").textContent = "Email is required";
+} else {
+document.getElementById("step2").classList.remove("active");
+document.getElementById("step3").classList.add("active");
+}
+});
+document.getElementById("submitBtn").addEventListener("click", function() {
+let password = document.getElementById("password").value.trim();
+if (password === "") {
+document.getElementById("error3").textContent = "Password is required";
+} else {
+alert("Form submitted successfully");
+}
+});
+</script>
+</body>
+</html>
