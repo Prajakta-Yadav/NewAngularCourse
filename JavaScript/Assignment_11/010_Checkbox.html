@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <label>
+<input type="checkbox" id="checkBox"> Show Message
+</label>
+<p id="text" style="display: none;">Hello, this is hidden text.</p>
+<script>
+const checkBox = document.getElementById("checkBox");
+const text = document.getElementById("text");
+checkBox.addEventListener("change", function () {
+if (checkBox.checked) {
+text.style.display = "block";
+} else {
+text.style.display = "none";
+}
+});
+</script>
+</body>
+</html>

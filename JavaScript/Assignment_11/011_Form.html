@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form id="myForm">
+<input type="text" id="name" placeholder="Enter name">
+<button type="submit">Submit</button>
+</form>
+<p id="error" style="color:red;"></p>
+<script>
+const myForm = document.getElementById("myForm");
+const nameInput = document.getElementById("name");
+const error = document.getElementById("error");
+myForm.addEventListener("submit", function (e) {
+if (nameInput.value.trim() === "") {
+e.preventDefault();
+error.textContent = "Name cannot be empty";
+} else {
+error.textContent = "";
+}
+});
+</script>
+</body>
+</html>

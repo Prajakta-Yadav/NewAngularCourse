@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h2>User List</h2>
+
+<p id="loading">Loading...</p>
+<p id="error" style="color:red;"></p>
+<ul id="users"></ul>
+
+<script>
+const loadingEl = document.getElementById("loading");
+const errorEl = document.getElementById("error");
+const usersEl = document.getElementById("users");
+
+// Show loading (already visible by default)
+loadingEl.style.display = "block";
+
+fetch("https://jsonplaceholder.typicode.com/users")
+.then(res => {
+    if (!res.ok) {
+        throw new Error("HTTP Error: " + res.status);
+    }
+    return res.json();
+})
+.then(data => {
+    // Hide loading after success
+    loadingEl.style.display = "none";
+
+    data.forEach(user => {
+        const li = document.createElement("li");
+        li.textContent = user.name;
+        usersEl.appendChild(li);
+    });
+})
+.catch(error => {
+    // Hide loading if error happens
+    loadingEl.style.display = "none";
+
+    errorEl.textContent = "Failed to load data: " + error.message;
+});
+</script>
+
+
+</body>
+</html>

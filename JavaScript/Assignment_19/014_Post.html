@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<h2>Create User</h2>
+
+<form id="userForm">
+    <input type="text" id="name" placeholder="Enter name" required><br><br>
+    <input type="email" id="email" placeholder="Enter email" required><br><br>
+    <button type="submit">Submit</button>
+</form>
+
+<p id="message"></p>
+
+<script>
+document.getElementById("userForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const messageEl = document.getElementById("message");
+
+    try {
+        const res = await fetch("https://jsonplaceholder.typicode.com/users", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: document.getElementById("name").value,
+                email: document.getElementById("email").value
+            })
+        });
+
+        if (!res.ok) {
+            throw new Error("Failed to create user");
+        }
+
+        const data = await res.json(); // ✅ await response JSON
+
+        // ✅ Show success message
+        messageEl.style.color = "green";
+        messageEl.textContent = "User created successfully! ID: " + data.id;
+
+    } catch (error) {
+        messageEl.style.color = "red";
+        messageEl.textContent = "Error: " + error.message;
+    }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <title>Modal Popup</title>
+<style>
+.modal {
+display: none;
+position: fixed;
+top: 30%;
+left: 35%;
+background: white;
+border: 1px solid black;
+padding: 20px;
+}
+.show {
+display: block;
+}
+</style>
+</head>
+<body>
+<button id="openBtn">Open Modal</button>
+<div id="modal" class="modal">
+<p>This is modal popup</p>
+<button id="closeBtn">Close</button>
+</div>
+<script>
+const openBtn = document.getElementById("openBtn");
+const closeBtn = document.getElementById("closeBtn");
+const modal = document.getElementById("modal");
+openBtn.addEventListener("click", function () {
+modal.classList.add("show");
+});
+closeBtn.addEventListener("click", function () {
+modal.classList.remove("show");
+});
+</script>
+</body>
+</html>

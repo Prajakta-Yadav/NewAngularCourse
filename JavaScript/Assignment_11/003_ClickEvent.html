@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <button id="btn1">onclick Button</button>
+<button id="btn2">addEventListener Button</button>
+<script>
+const btn1 = document.getElementById("btn1");
+const btn2 = document.getElementById("btn2");
+btn1.onclick = function () {
+console.log("First onclick");
+};
+btn1.onclick = function () {
+console.log("Second onclick");
+};
+// Only second runs because onclick overrides previous one
+btn2.addEventListener("click", function () {
+console.log("First addEventListener");
+});
+btn2.addEventListener("click", function () {
+console.log("Second addEventListener");
+});
+// Both run
+</script>
+</body>
+</html>

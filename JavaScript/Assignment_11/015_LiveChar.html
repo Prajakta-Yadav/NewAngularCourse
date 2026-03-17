@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <textarea id="textArea" rows="5" cols="30"></textarea>
+<p>Characters: <span id="count">0</span></p>
+<script>
+const textArea = document.getElementById("textArea");
+const count = document.getElementById("count");
+textArea.addEventListener("keyup", function () {
+count.textContent = textArea.value.length;
+});
+</script>
+</body>
+</html>

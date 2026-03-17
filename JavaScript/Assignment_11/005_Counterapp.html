@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <button id="inc">Increase</button>
+<button id="dec">Decrease</button>
+<script>
+let count = 0;
+const countText = document.getElementById("count");
+document.getElementById("inc").addEventListener("click", function () {
+count++;
+countText.textContent = count;
+});
+
+document.getElementById("dec").addEventListener("click", function () {
+count--;
+countText.textContent = count;
+});
+</script>
+</body>
+</html>

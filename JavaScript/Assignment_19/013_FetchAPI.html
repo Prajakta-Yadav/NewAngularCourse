@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<h2>Create User</h2>
+
+<form id="userForm">
+    <input type="text" id="name" placeholder="Enter name" required><br><br>
+    <input type="email" id="email" placeholder="Enter email" required><br><br>
+    <button type="submit">Submit</button>
+</form>
+
+<p id="message"></p>
+
+<script>
+document.getElementById("userForm").addEventListener("submit", function(e) {
+    e.preventDefault(); // 🚫 Prevent page reload
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+
+    fetch("https://jsonplaceholder.typicode.com/users", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            name: name,
+            email: email
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("message").textContent =
+            "User created successfully! ID: " + data.id;
+
+        console.log(data);
+    })
+    .catch(error => {
+        document.getElementById("message").textContent =
+            "Error: " + error.message;
+    });
+});
+</script>
+
+</body>
+</html>

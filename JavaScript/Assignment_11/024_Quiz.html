@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <button class="option">Mumbai</button>
+<button class="option">Delhi</button>
+<button class="option">Pune</button>
+<p id="result"></p>
+<script>
+const options = document.querySelectorAll(".option");
+const result = document.getElementById("result");
+options.forEach(function (btn) {
+btn.addEventListener("click", function () {
+if (btn.textContent === "Delhi") {
+result.style.color = "green";
+result.textContent = "Correct Answer";
+} else {
+result.style.color = "red";
+result.textContent = "Wrong Answer";
+}
+});
+});
+</script>
+</body>
+</html>

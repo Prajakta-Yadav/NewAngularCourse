@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Propagation</title>
+<style>
+#parent {
+padding: 40px;
+background: lightblue;
+}
+#child {
+padding: 20px;
+background: orange;
+}
+</style>
+</head>
+<body>
+<div id="parent">
+Parent
+<button id="child">Child Button</button>
+</div>
+<script>
+const parent = document.getElementById("parent");
+const child = document.getElementById("child");
+parent.addEventListener("click", function () {
+alert("Parent clicked");
+});
+child.addEventListener("click", function (e) {
+e.stopPropagation();
+alert("Child clicked");
+});
+</script>
+
+</body>
+</html>

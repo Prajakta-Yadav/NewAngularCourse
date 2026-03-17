@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form id="form">
+<input type="text" id="username" placeholder="Enter username">
+<button type="submit">Submit</button>
+</form>
+<p id="output"></p>
+<script>
+const form = document.getElementById("form");
+const username = document.getElementById("username");
+const output = document.getElementById("output");
+form.addEventListener("submit", function (e) {
+e.preventDefault();
+output.textContent = "Submitted Name: " + username.value;
+});
+</script>
+</body>
+</html>

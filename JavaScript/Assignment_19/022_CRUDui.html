@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple CRUD UI</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    input {
+      padding: 8px;
+      margin: 5px;
+    }
+
+    button {
+      padding: 8px 12px;
+      margin: 5px;
+      cursor: pointer;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background: #f3f3f3;
+    }
+
+    #message {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Product CRUD App</h2>
+
+  <input type="text" id="title" placeholder="Product title">
+  <input type="number" id="price" placeholder="Price">
+  <button onclick="addProduct()">Add Product</button>
+
+  <p id="message"></p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="productTableBody"></tbody>
+  </table>
+
+  <script>
+    const apiUrl = "https://fakestoreapi.com/products";
+    const tableBody = document.getElementById("productTableBody");
+    const messageEl = document.getElementById("message");
+
+    async function loadProducts() {
+      try {
+        const response = await fetch(apiUrl);
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch products");
+        }
+
+        const products = await response.json();
+        tableBody.innerHTML = "";
+
+        products.slice(0, 8).forEach(product => {
+          const row = document.createElement("tr");
+
+          row.innerHTML = `
+            <td>${product.id}</td>
+            <td>${product.title}</td>
+            <td>$${product.price}</td>
+            <td>
+              <button onclick="updateProduct(${product.id})">Update</button>
+              <button onclick="deleteProduct(${product.id})">Delete</button>
+            </td>
+          `;
+
+          tableBody.appendChild(row);
+        });
+      } catch (error) {
+        messageEl.textContent = "Error: " + error.message;
+      }
+    }
+
+    async function addProduct() {
+      const title = document.getElementById("title").value;
+      const price = document.getElementById("price").value;
+
+      if (!title || !price) {
+        messageEl.textContent = "Please enter title and price";
+        return;
+      }
+
+      try {
+        const response = await fetch(apiUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            title: title,
+            price: Number(price),
+            description: "New product",
+            category: "general"
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to add product");
+        }
+
+        const data = await response.json();
+        messageEl.textContent = "Product added successfully. ID: " + data.id;
+
+        document.getElementById("title").value = "";
+        document.getElementById("price").value = "";
+
+        loadProducts();
+      } catch (error) {
+        messageEl.textContent = "Error: " + error.message;
+      }
+    }
+
+    async function updateProduct(id) {
+      try {
+        const response = await fetch(`${apiUrl}/${id}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            title: "Updated Product " + id,
+            price: 555
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to update product");
+        }
+
+        await response.json();
+        messageEl.textContent = "Product updated successfully";
+
+        loadProducts();
+      } catch (error) {
+        messageEl.textContent = "Error: " + error.message;
+      }
+    }
+
+    async function deleteProduct(id) {
+      try {
+        const response = await fetch(`${apiUrl}/${id}`, {
+          method: "DELETE"
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to delete product");
+        }
+
+        await response.json();
+        messageEl.textContent = "Product deleted successfully";
+
+        loadProducts();
+      } catch (error) {
+        messageEl.textContent = "Error: " + error.message;
+      }
+    }
+
+    loadProducts();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>User List</h2>
+<p id="error" style="color:red;"></p>
+<ul id="users"></ul>
+
+<script>
+fetch("https://jsonplaceholder.typicode.com/users")
+.then(res => {
+    if (!res.ok) {
+        throw new Error("Server error: " + res.status);
+    }
+    return res.json();
+})
+.then(data => {
+    const list = document.getElementById("users");
+
+    data.forEach(user => {
+        const li = document.createElement("li");
+        li.textContent = user.name;
+        list.appendChild(li);
+    });
+})
+.catch(error => {
+    document.getElementById("error").textContent =
+        "Failed to load users: " + error.message;
+});
+</script>
+
+</body>
+</html>
