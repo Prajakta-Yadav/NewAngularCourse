@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Professional Registration Form</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="form-card">
+      <h1>Registration Form</h1>
+      <p class="subtitle">Create your account by filling in the details below.</p>
+
+      <form id="registrationForm" novalidate>
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter your full name" />
+          <small class="error" id="nameError"></small>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" />
+          <small class="error" id="emailError"></small>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="text" id="phone" name="phone" placeholder="Enter your phone number" />
+          <small class="error" id="phoneError"></small>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Create a strong password" />
+          <div class="strength-wrapper">
+            <div class="strength-bar" id="strengthBar"></div>
+          </div>
+          <small class="strength-text" id="strengthText"></small>
+          <small class="error" id="passwordError"></small>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter your password" />
+          <small class="error" id="confirmPasswordError"></small>
+        </div>
+
+        <div class="form-group">
+          <label>Gender</label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="gender" value="Male" />
+              <span>Male</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="gender" value="Female" />
+              <span>Female</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="gender" value="Other" />
+              <span>Other</span>
+            </label>
+          </div>
+          <small class="error" id="genderError"></small>
+        </div>
+
+        <div class="form-group checkbox-group">
+          <label class="checkbox-option">
+            <input type="checkbox" id="terms" name="terms" />
+            <span>I agree to the Terms and Conditions</span>
+          </label>
+          <small class="error" id="termsError"></small>
+        </div>
+
+        <button type="submit" id="submitBtn" disabled>Register</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup">
+      <h2>Registration Successful</h2>
+      <p>Your account has been created successfully.</p>
+      <button id="closePopup">OK</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

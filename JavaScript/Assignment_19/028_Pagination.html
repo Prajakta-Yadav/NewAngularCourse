@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pagination Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    #loading {
+      color: #007bff;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    #message {
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: red;
+    }
+
+    .post {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 12px;
+      background: #fafafa;
+    }
+
+    .post h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .post p {
+      margin: 0;
+      color: #444;
+    }
+
+    .pagination {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: #007bff;
+      color: white;
+    }
+
+    button:disabled {
+      background: #999;
+      cursor: not-allowed;
+    }
+
+    #pageInfo {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Posts Pagination</h2>
+
+    <p id="loading">Loading...</p>
+    <p id="message"></p>
+    <div id="postList"></div>
+
+    <div class="pagination">
+      <button id="prevBtn">Previous</button>
+      <span id="pageInfo">Page 1</span>
+      <button id="nextBtn">Next</button>
+    </div>
+  </div>
+
+  <script>
+    const apiUrl = "https://jsonplaceholder.typicode.com/posts";
+    const limit = 5;
+    let currentPage = 1;
+
+    const postList = document.getElementById("postList");
+    const loadingEl = document.getElementById("loading");
+    const messageEl = document.getElementById("message");
+    const pageInfo = document.getElementById("pageInfo");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    async function fetchPosts(page) {
+      loadingEl.style.display = "block";
+      messageEl.textContent = "";
+
+      try {
+        const response = await fetch(`${apiUrl}?_page=${page}&_limit=${limit}`);
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch posts");
+        }
+
+        const posts = await response.json();
+
+        postList.innerHTML = "";
+
+        posts.forEach(post => {
+          const div = document.createElement("div");
+          div.className = "post";
+          div.innerHTML = `
+            <h3>${post.title}</h3>
+            <p>${post.body}</p>
+          `;
+          postList.appendChild(div);
+        });
+
+        pageInfo.textContent = `Page ${currentPage}`;
+
+        prevBtn.disabled = currentPage === 1;
+        nextBtn.disabled = posts.length < limit;
+
+      } catch (error) {
+        messageEl.textContent = "Error: " + error.message;
+      } finally {
+        loadingEl.style.display = "none";
+      }
+    }
+
+    prevBtn.addEventListener("click", function() {
+      if (currentPage > 1) {
+        currentPage--;
+        fetchPosts(currentPage);
+      }
+    });
+
+    nextBtn.addEventListener("click", function() {
+      currentPage++;
+      fetchPosts(currentPage);
+    });
+
+    fetchPosts(currentPage);
+  </script>
+</body>
+</html>

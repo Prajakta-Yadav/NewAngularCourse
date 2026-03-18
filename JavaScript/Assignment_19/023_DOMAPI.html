@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Management System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f7f7f7;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    form {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      flex: 1;
+      min-width: 200px;
+    }
+
+    button {
+      padding: 10px 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .add-btn {
+      background: #007bff;
+      color: white;
+    }
+
+    .update-btn {
+      background: #28a745;
+      color: white;
+    }
+
+    .edit-btn {
+      background: #ffc107;
+    }
+
+    .delete-btn {
+      background: #dc3545;
+      color: white;
+    }
+
+    .cancel-btn {
+      background: #6c757d;
+      color: white;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background: #f1f1f1;
+    }
+
+    #message {
+      margin: 10px 0 15px;
+      font-weight: bold;
+    }
+
+    #loading {
+      margin-bottom: 15px;
+      color: #007bff;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>User Management System</h2>
+
+    <p id="loading">Loading users...</p>
+    <p id="message"></p>
+
+    <form id="userForm">
+      <input type="text" id="name" placeholder="Enter name" required />
+      <input type="email" id="email" placeholder="Enter email" required />
+      <button type="submit" class="add-btn" id="submitBtn">Add User</button>
+      <button type="button" class="cancel-btn" id="cancelEditBtn" style="display:none;">Cancel</button>
+    </form>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="userTableBody"></tbody>
+    </table>
+  </div>
+
+  <script>
+    const apiUrl = "https://jsonplaceholder.typicode.com/users";
+
+    const userTableBody = document.getElementById("userTableBody");
+    const userForm = document.getElementById("userForm");
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+    const submitBtn = document.getElementById("submitBtn");
+    const cancelEditBtn = document.getElementById("cancelEditBtn");
+    const loadingEl = document.getElementById("loading");
+    const messageEl = document.getElementById("message");
+
+    let users = [];
+    let editUserId = null;
+
+    function showMessage(text, isError = false) {
+      messageEl.textContent = text;
+      messageEl.style.color = isError ? "red" : "green";
+    }
+
+    function renderUsers() {
+      userTableBody.innerHTML = "";
+
+      users.forEach(user => {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+          <td>${user.id}</td>
+          <td>${user.name}</td>
+          <td>${user.email}</td>
+          <td>
+            <button class="edit-btn" onclick="editUser(${user.id})">Edit</button>
+            <button class="delete-btn" onclick="deleteUser(${user.id})">Delete</button>
+          </td>
+        `;
+
+        userTableBody.appendChild(row);
+      });
+    }
+
+    async function fetchUsers() {
+      loadingEl.style.display = "block";
+      loadingEl.textContent = "Loading users...";
+
+      try {
+        const response = await fetch(apiUrl);
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch users");
+        }
+
+        const data = await response.json();
+        users = data;
+        renderUsers();
+      } catch (error) {
+        showMessage("Error: " + error.message, true);
+      } finally {
+        loadingEl.style.display = "none";
+      }
+    }
+
+    async function addUser(userData) {
+      try {
+        const response = await fetch(apiUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(userData)
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to add user");
+        }
+
+        const newUser = await response.json();
+
+        users.unshift({
+          id: newUser.id || Date.now(),
+          name: userData.name,
+          email: userData.email
+        });
+
+        renderUsers();
+        showMessage("User added successfully");
+      } catch (error) {
+        showMessage("Error: " + error.message, true);
+      }
+    }
+
+    async function updateUser(id, userData) {
+      try {
+        const response = await fetch(`${apiUrl}/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            id,
+            ...userData
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to update user");
+        }
+
+        await response.json();
+
+        users = users.map(user =>
+          user.id === id ? { ...user, ...userData } : user
+        );
+
+        renderUsers();
+        showMessage("User updated successfully");
+      } catch (error) {
+        showMessage("Error: " + error.message, true);
+      }
+    }
+
+    async function deleteUser(id) {
+      try {
+        const response = await fetch(`${apiUrl}/${id}`, {
+          method: "DELETE"
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to delete user");
+        }
+
+        users = users.filter(user => user.id !== id);
+        renderUsers();
+        showMessage("User deleted successfully");
+      } catch (error) {
+        showMessage("Error: " + error.message, true);
+      }
+    }
+
+    function editUser(id) {
+      const user = users.find(user => user.id === id);
+      if (!user) return;
+
+      nameInput.value = user.name;
+      emailInput.value = user.email;
+
+      editUserId = id;
+      submitBtn.textContent = "Update User";
+      submitBtn.className = "update-btn";
+      cancelEditBtn.style.display = "inline-block";
+    }
+
+    function resetForm() {
+      userForm.reset();
+      editUserId = null;
+      submitBtn.textContent = "Add User";
+      submitBtn.className = "add-btn";
+      cancelEditBtn.style.display = "none";
+    }
+
+    userForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const name = nameInput.value.trim();
+      const email = emailInput.value.trim();
+
+      if (!name || !email) {
+        showMessage("Please fill all fields", true);
+        return;
+      }
+
+      const userData = { name, email };
+
+      if (editUserId === null) {
+        await addUser(userData);
+      } else {
+        await updateUser(editUserId, userData);
+      }
+
+      resetForm();
+    });
+
+    cancelEditBtn.addEventListener("click", resetForm);
+
+    fetchUsers();
+  </script>
+</body>
+</html>

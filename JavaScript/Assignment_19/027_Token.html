@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Fetch with Auth Token</h2>
+<button onclick="getUsers()">Load Users</button>
+
+<p id="message"></p>
+
+<script>
+async function getUsers() {
+    const messageEl = document.getElementById("message");
+
+    try {
+        const token = "my_secret_token_123"; // simulate token
+
+        const res = await fetch("https://jsonplaceholder.typicode.com/users", {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (!res.ok) {
+            throw new Error("Unauthorized or failed request");
+        }
+
+        const data = await res.json();
+
+        messageEl.textContent = "Fetched " + data.length + " users successfully";
+        console.log(data);
+
+    } catch (error) {
+        messageEl.textContent = "Error: " + error.message;
+    }
+}
+</script>
+
+</body>
+</html>

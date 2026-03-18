@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Data Fetch App</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div>
+        <h1>User Directory</h1>
+        <p>Fetch and display users from a public API</p>
+      </div>
+
+      <button id="refreshBtn" class="refresh-btn">Refresh</button>
+    </header>
+
+    <section class="controls">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search by name, email, or city..."
+      />
+    </section>
+
+    <div id="loading" class="loading hidden">Loading users...</div>
+    <div id="errorMessage" class="error hidden"></div>
+
+    <section id="userContainer" class="card-grid"></section>
+
+    <div class="pagination" id="pagination"></div>
+  </div>
+
+  <div id="userModal" class="modal hidden">
+  <div class="modal-content">
+    <button id="closeModal" class="close-btn">&times;</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+  <script src="script.js"></script>
+</body>
+</html>

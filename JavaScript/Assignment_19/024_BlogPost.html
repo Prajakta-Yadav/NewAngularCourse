@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog Post Manager</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      margin-top: 0;
+    }
+
+    form {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .primary {
+      background: #007bff;
+      color: white;
+    }
+
+    .success {
+      background: #28a745;
+      color: white;
+    }
+
+    .danger {
+      background: #dc3545;
+      color: white;
+    }
+
+    .warning {
+      background: #ffc107;
+    }
+
+    .secondary {
+      background: #6c757d;
+      color: white;
+    }
+
+    #message {
+      margin: 10px 0;
+      font-weight: bold;
+    }
+
+    #loading {
+      font-weight: bold;
+      color: #007bff;
+      margin-bottom: 15px;
+    }
+
+    .post-list {
+      display: grid;
+      gap: 15px;
+    }
+
+    .post-card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      background: #fafafa;
+    }
+
+    .post-card h3 {
+      margin: 0 0 8px;
+    }
+
+    .post-card p {
+      margin: 0 0 12px;
+      color: #333;
+    }
+
+    .post-card small {
+      display: block;
+      margin-bottom: 12px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Blog Post Manager</h1>
+
+    <p id="loading">Loading posts...</p>
+    <p id="message"></p>
+
+    <form id="postForm">
+      <input type="text" id="title" placeholder="Enter post title" required />
+      <textarea id="body" placeholder="Enter post content" required></textarea>
+
+      <div class="btn-group">
+        <button type="submit" id="submitBtn" class="primary">Add Post</button>
+        <button type="button" id="cancelBtn" class="secondary" style="display:none;">Cancel Edit</button>
+      </div>
+    </form>
+
+    <div id="postList" class="post-list"></div>
+  </div>
+
+  <script>
+    const apiUrl = "https://jsonplaceholder.typicode.com/posts";
+
+    const postForm = document.getElementById("postForm");
+    const titleInput = document.getElementById("title");
+    const bodyInput = document.getElementById("body");
+    const submitBtn = document.getElementById("submitBtn");
+    const cancelBtn = document.getElementById("cancelBtn");
+    const postList = document.getElementById("postList");
+    const loadingEl = document.getElementById("loading");
+    const messageEl = document.getElementById("message");
+
+    let posts = [];
+    let editPostId = null;
+
+    function showMessage(text, isError = false) {
+      messageEl.textContent = text;
+      messageEl.style.color = isError ? "red" : "green";
+    }
+
+    function renderPosts() {
+      postList.innerHTML = "";
+
+      posts.forEach(post => {
+        const card = document.createElement("div");
+        card.className = "post-card";
+
+        card.innerHTML = `
+          <h3>${post.title}</h3>
+          <small>Post ID: ${post.id}</small>
+          <p>${post.body}</p>
+          <div class="btn-group">
+            <button class="warning" onclick="editPost(${post.id})">Edit</button>
+            <button class="danger" onclick="deletePost(${post.id})">Delete</button>
+          </div>
+        `;
+
+        postList.appendChild(card);
+      });
+    }
+
+    async function fetchPosts() {
+      loadingEl.style.display = "block";
+
+      try {
+        const response = await fetch(apiUrl);
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch posts");
+        }
+
+        const data = await response.json();
+        posts = data.slice(0, 10);
+        renderPosts();
+      } catch (error) {
+        showMessage("Error: " + error.message, true);
+      } finally {
+        loadingEl.style.display = "none";
+      }
+    }
+
+    async function createPost(postData) {
+      try {
+        const response = await fetch(apiUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(postData)
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to create post");
+        }
+
+        const newPost = await response.json();
+
+        posts.unshift({
+          id: newPost.id || Date.now(),
+          title: postData.title,
+          body: postData.body
+        });
+
+        renderPosts();
+        showMessage("Post created successfully");
+      } catch (error) {
+        showMessage("Error: " + error.message, true);
+      }
+    }
+
+    async function updatePost(id, postData) {
+      try {
+        const response = await fetch(`${apiUrl}/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            id: id,
+            ...postData
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to update post");
+        }
+
+        await response.json();
+
+        posts = posts.map(post =>
+          post.id === id ? { ...post, ...postData } : post
+        );
+
+        renderPosts();
+        showMessage("Post updated successfully");
+      } catch (error) {
+        showMessage("Error: " + error.message, true);
+      }
+    }
+
+    async function deletePost(id) {
+      try {
+        const response = await fetch(`${apiUrl}/${id}`, {
+          method: "DELETE"
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to delete post");
+        }
+
+        posts = posts.filter(post => post.id !== id);
+        renderPosts();
+        showMessage("Post deleted successfully");
+      } catch (error) {
+        showMessage("Error: " + error.message, true);
+      }
+    }
+
+    function editPost(id) {
+      const post = posts.find(p => p.id === id);
+      if (!post) return;
+
+      titleInput.value = post.title;
+      bodyInput.value = post.body;
+
+      editPostId = id;
+      submitBtn.textContent = "Update Post";
+      submitBtn.className = "success";
+      cancelBtn.style.display = "inline-block";
+    }
+
+    function resetForm() {
+      postForm.reset();
+      editPostId = null;
+      submitBtn.textContent = "Add Post";
+      submitBtn.className = "primary";
+      cancelBtn.style.display = "none";
+    }
+
+    postForm.addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const title = titleInput.value.trim();
+      const body = bodyInput.value.trim();
+
+      if (!title || !body) {
+        showMessage("Please fill all fields", true);
+        return;
+      }
+
+      const postData = {
+        title: title,
+        body: body,
+        userId: 1
+      };
+
+      if (editPostId === null) {
+        await createPost(postData);
+      } else {
+        await updatePost(editPostId, postData);
+      }
+
+      resetForm();
+    });
+
+    cancelBtn.addEventListener("click", resetForm);
+
+    fetchPosts();
+  </script>
+</body>
+</html>

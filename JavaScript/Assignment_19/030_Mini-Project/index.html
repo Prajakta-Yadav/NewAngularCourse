@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini CRUD App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      margin-top: 0;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      padding: 10px 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .primary {
+      background: #007bff;
+      color: white;
+    }
+
+    .success {
+      background: #28a745;
+      color: white;
+    }
+
+    .warning {
+      background: #ffc107;
+    }
+
+    .danger {
+      background: #dc3545;
+      color: white;
+    }
+
+    .secondary {
+      background: #6c757d;
+      color: white;
+    }
+
+    #message {
+      margin: 10px 0;
+      font-weight: bold;
+    }
+
+    #loading {
+      color: #007bff;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background: #f1f1f1;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Product CRUD App</h1>
+
+    <p id="loading">Loading products...</p>
+    <p id="message"></p>
+
+    <form id="productForm">
+      <input type="text" id="name" placeholder="Product name" required />
+      <input type="number" id="price" placeholder="Price" required />
+      <input type="text" id="category" placeholder="Category" required />
+
+      <button type="submit" id="submitBtn" class="primary">Add Product</button>
+      <button type="button" id="cancelBtn" class="secondary" style="display:none;">Cancel</button>
+    </form>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Category</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="productTableBody"></tbody>
+    </table>
+  </div>
+
+  <script>
+    const apiUrl = "http://localhost:3000/products";
+
+    const productForm = document.getElementById("productForm");
+    const nameInput = document.getElementById("name");
+    const priceInput = document.getElementById("price");
+    const categoryInput = document.getElementById("category");
+    const submitBtn = document.getElementById("submitBtn");
+    const cancelBtn = document.getElementById("cancelBtn");
+    const productTableBody = document.getElementById("productTableBody");
+    const loadingEl = document.getElementById("loading");
+    const messageEl = document.getElementById("message");
+
+    let editProductId = null;
+
+    function showMessage(text, isError = false) {
+      messageEl.textContent = text;
+      messageEl.style.color = isError ? "red" : "green";
+    }
+
+    function resetForm() {
+      productForm.reset();
+      editProductId = null;
+      submitBtn.textContent = "Add Product";
+      submitBtn.className = "primary";
+      cancelBtn.style.display = "none";
+    }
+
+    async function fetchProducts() {
+      loadingEl.style.display = "block";
+      productTableBody.innerHTML = "";
+
+      try {
+        const response = await fetch(apiUrl);
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch products");
+        }
+
+        const products = await response.json();
+
+        products.forEach(product => {
+          const row = document.createElement("tr");
+
+          row.innerHTML = `
+            <td>${product.id}</td>
+            <td>${product.name}</td>
+            <td>${product.price}</td>
+            <td>${product.category}</td>
+            <td>
+              <div class="actions">
+                <button class="warning" onclick="editProduct(${product.id}, '${product.name}', ${product.price}, '${product.category}')">Edit</button>
+                <button class="danger" onclick="deleteProduct(${product.id})">Delete</button>
+              </div>
+            </td>
+          `;
+
+          productTableBody.appendChild(row);
+        });
+      } catch (error) {
+        showMessage("Error: " + error.message, true);
+      } finally {
+        loadingEl.style.display = "none";
+      }
+    }
+
+    async function addProduct(productData) {
+      try {
+        const response = await fetch(apiUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(productData)
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to add product");
+        }
+
+        await response.json();
+        showMessage("Product added successfully");
+        fetchProducts();
+      } catch (error) {
+        showMessage("Error: " + error.message, true);
+      }
+    }
+
+    async function updateProduct(id, productData) {
+      try {
+        const response = await fetch(`${apiUrl}/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            id,
+            ...productData
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to update product");
+        }
+
+        await response.json();
+        showMessage("Product updated successfully");
+        fetchProducts();
+      } catch (error) {
+        showMessage("Error: " + error.message, true);
+      }
+    }
+
+    async function deleteProduct(id) {
+      try {
+        const response = await fetch(`${apiUrl}/${id}`, {
+          method: "DELETE"
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to delete product");
+        }
+
+        showMessage("Product deleted successfully");
+        fetchProducts();
+      } catch (error) {
+        showMessage("Error: " + error.message, true);
+      }
+    }
+
+    function editProduct(id, name, price, category) {
+      nameInput.value = name;
+      priceInput.value = price;
+      categoryInput.value = category;
+
+      editProductId = id;
+      submitBtn.textContent = "Update Product";
+      submitBtn.className = "success";
+      cancelBtn.style.display = "inline-block";
+    }
+
+    productForm.addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const productData = {
+        name: nameInput.value.trim(),
+        price: Number(priceInput.value),
+        category: categoryInput.value.trim()
+      };
+
+      if (!productData.name || !productData.price || !productData.category) {
+        showMessage("Please fill all fields", true);
+        return;
+      }
+
+      if (editProductId === null) {
+        await addProduct(productData);
+      } else {
+        await updateProduct(editProductId, productData);
+      }
+
+      resetForm();
+    });
+
+    cancelBtn.addEventListener("click", resetForm);
+
+    fetchProducts();
+  </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dynamic Product Listing App</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div>
+        <h1>Product Listing App</h1>
+        <p>Search, filter, sort, and manage your cart</p>
+      </div>
+
+      <div class="cart-summary">
+        <span>Cart Items: <strong id="cartCount">0</strong></span>
+        <span>Total: <strong id="cartTotal">$0.00</strong></span>
+      </div>
+    </header>
+
+    <section class="controls">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search by product name..."
+      />
+
+      <select id="priceFilter">
+        <option value="all">All Prices</option>
+        <option value="0-50">$0 - $50</option>
+        <option value="51-100">$51 - $100</option>
+        <option value="101-200">$101 - $200</option>
+        <option value="201-1000">$201+</option>
+      </select>
+
+      <select id="sortPrice">
+        <option value="default">Sort By</option>
+        <option value="lowToHigh">Price: Low to High</option>
+        <option value="highToLow">Price: High to Low</option>
+      </select>
+    </section>
+
+    <main class="layout">
+      <section>
+        <h2 class="section-title">Products</h2>
+        <div id="productList" class="product-grid"></div>
+      </section>
+
+      <aside class="cart-panel">
+        <h2 class="section-title">Shopping Cart</h2>
+        <div id="cartItems" class="cart-items"></div>
+        <div class="cart-footer">
+          <p>Items: <span id="footerCartCount">0</span></p>
+          <p>Total: <span id="footerCartTotal">$0.00</span></p>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
