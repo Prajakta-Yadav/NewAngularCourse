@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>localStorage Assignment</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      transition: 0.3s;
+    }
+
+    .dark {
+      background-color: #222;
+      color: white;
+    }
+
+    .light {
+      background-color: white;
+      color: black;
+    }
+
+    button {
+      margin: 5px 0;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    input {
+      padding: 8px;
+      margin: 5px 0;
+    }
+
+    .box {
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>JavaScript localStorage Assignment</h1>
+
+  <!-- 1. Store username -->
+  <div class="box">
+    <h3>1. Store username in localStorage</h3>
+    <input type="text" id="usernameInput" placeholder="Enter username" />
+    <button onclick="saveUsername()">Save Username</button>
+    <p id="displayUsername"></p>
+  </div>
+
+  <!-- 2. Remove specific item -->
+  <div class="box">
+    <h3>2. Remove specific item from localStorage</h3>
+    <button onclick="storeValues()">Store Sample Values</button>
+    <button onclick="removeAge()">Remove Age</button>
+    <p id="removeMessage"></p>
+  </div>
+
+  <!-- 3. Clear localStorage -->
+  <div class="box">
+    <h3>3. Clear entire localStorage</h3>
+    <button onclick="clearStorage()">Clear Storage</button>
+    <p id="clearMessage"></p>
+  </div>
+
+  <!-- 4. Check if value exists -->
+  <div class="box">
+    <h3>4. Check if key exists in localStorage</h3>
+    <button onclick="checkUser()">Check Username Key</button>
+    <p id="checkMessage"></p>
+  </div>
+
+  <!-- 5. Theme toggle -->
+  <div class="box">
+    <h3>5. Auto load saved theme</h3>
+    <button onclick="setTheme('light')">Light Mode</button>
+    <button onclick="setTheme('dark')">Dark Mode</button>
+    <p>Selected theme will stay after refresh.</p>
+  </div>
+
+  <script>
+    // Load username on page refresh
+    window.onload = function () {
+      const savedUsername = localStorage.getItem("username");
+      if (savedUsername) {
+        document.getElementById("displayUsername").innerText =
+          "Saved Username: " + savedUsername;
+      }
+
+      // Load saved theme on page load
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) {
+        document.body.className = savedTheme;
+      } else {
+        document.body.className = "light";
+      }
+    };
+
+    // 1. Save username
+    function saveUsername() {
+      const username = document.getElementById("usernameInput").value;
+      localStorage.setItem("username", username);
+      document.getElementById("displayUsername").innerText =
+        "Saved Username: " + username;
+    }
+
+    // 2. Store some values
+    function storeValues() {
+      localStorage.setItem("name", "Amit");
+      localStorage.setItem("age", "22");
+      localStorage.setItem("city", "Delhi");
+      document.getElementById("removeMessage").innerText =
+        "Stored name, age, and city in localStorage.";
+    }
+
+    // 2. Remove one value
+    function removeAge() {
+      localStorage.removeItem("age");
+      document.getElementById("removeMessage").innerText =
+        "'age' removed from localStorage.";
+    }
+
+    // 3. Clear all storage
+    function clearStorage() {
+      localStorage.clear();
+      document.getElementById("clearMessage").innerText =
+        "All localStorage values cleared.";
+      document.getElementById("displayUsername").innerText = "";
+      document.body.className = "light";
+    }
+
+    // 4. Check if key exists
+    function checkUser() {
+      const user = localStorage.getItem("username");
+      if (user !== null) {
+        document.getElementById("checkMessage").innerText =
+          "Username exists in localStorage.";
+      } else {
+        document.getElementById("checkMessage").innerText =
+          "Username does not exist in localStorage.";
+      }
+    }
+
+    // 5. Save and apply theme
+    function setTheme(theme) {
+      localStorage.setItem("theme", theme);
+      document.body.className = theme;
+    }
+  </script>
+</body>
+</html>

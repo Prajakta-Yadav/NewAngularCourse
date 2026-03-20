@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>localStorage Assignment 6-10</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .box {
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 8px;
+    }
+    button {
+      margin: 5px 0;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+    input {
+      padding: 8px;
+      margin: 5px 0;
+    }
+    ul {
+      padding-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>JavaScript localStorage Assignment (6-10)</h1>
+
+  <!-- 6. Store object -->
+  <div class="box">
+    <h3>6. Store object in localStorage</h3>
+    <button onclick="storeObject()">Store User Object</button>
+    <button onclick="getObject()">Retrieve User Object</button>
+    <p id="objectResult"></p>
+  </div>
+
+  <!-- 7. Store array -->
+  <div class="box">
+    <h3>7. Store array in localStorage</h3>
+    <button onclick="storeProducts()">Store Products</button>
+    <button onclick="showProducts()">Display Products</button>
+    <ul id="productList"></ul>
+  </div>
+
+  <!-- 8. Update object -->
+  <div class="box">
+    <h3>8. Update object stored in localStorage</h3>
+    <button onclick="updateUser()">Update User Age</button>
+    <p id="updateResult"></p>
+  </div>
+
+  <!-- 9. To do list -->
+  <div class="box">
+    <h3>9. Simple To Do List using localStorage</h3>
+    <input type="text" id="taskInput" placeholder="Enter task" />
+    <button onclick="addTask()">Add Task</button>
+    <ul id="taskList"></ul>
+  </div>
+
+  <!-- 10. Shopping cart -->
+  <div class="box">
+    <h3>10. Shopping Cart using localStorage</h3>
+    <input type="text" id="cartInput" placeholder="Enter item name" />
+    <button onclick="addToCart()">Add to Cart</button>
+    <ul id="cartList"></ul>
+  </div>
+
+  <script>
+    // 6. Store object
+    function storeObject() {
+      const user = {
+        name: "Rahul",
+        age: 21,
+        city: "Mumbai"
+      };
+
+      localStorage.setItem("user", JSON.stringify(user));
+      document.getElementById("objectResult").innerText =
+        "User object stored in localStorage.";
+    }
+
+    function getObject() {
+      const userData = localStorage.getItem("user");
+      const user = JSON.parse(userData);
+
+      document.getElementById("objectResult").innerText =
+        `Name: ${user.name}, Age: ${user.age}, City: ${user.city}`;
+    }
+
+    // 7. Store array
+    function storeProducts() {
+      const products = ["Laptop", "Mobile", "Headphones", "Keyboard"];
+      localStorage.setItem("products", JSON.stringify(products));
+      showProducts();
+    }
+
+    function showProducts() {
+      const products = JSON.parse(localStorage.getItem("products")) || [];
+      const productList = document.getElementById("productList");
+      productList.innerHTML = "";
+
+      products.forEach(product => {
+        const li = document.createElement("li");
+        li.innerText = product;
+        productList.appendChild(li);
+      });
+    }
+
+    // 8. Update object
+    function updateUser() {
+      let user = JSON.parse(localStorage.getItem("user"));
+
+      if (user) {
+        user.age = 25; // modify property
+        localStorage.setItem("user", JSON.stringify(user));
+        document.getElementById("updateResult").innerText =
+          `Updated User: Name: ${user.name}, Age: ${user.age}, City: ${user.city}`;
+      } else {
+        document.getElementById("updateResult").innerText =
+          "No user object found. Store object first.";
+      }
+    }
+
+    // 9. To do list
+    function loadTasks() {
+      const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      const taskList = document.getElementById("taskList");
+      taskList.innerHTML = "";
+
+      tasks.forEach((task, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = `${task} <button onclick="deleteTask(${index})">Delete</button>`;
+        taskList.appendChild(li);
+      });
+    }
+
+    function addTask() {
+      const taskInput = document.getElementById("taskInput");
+      const task = taskInput.value.trim();
+
+      if (task === "") return;
+
+      const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      tasks.push(task);
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+
+      taskInput.value = "";
+      loadTasks();
+    }
+
+    function deleteTask(index) {
+      const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      tasks.splice(index, 1);
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+      loadTasks();
+    }
+
+    // 10. Shopping cart
+    function loadCart() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const cartList = document.getElementById("cartList");
+      cartList.innerHTML = "";
+
+      cart.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.innerText = `${item}`;
+        cartList.appendChild(li);
+      });
+    }
+
+    function addToCart() {
+      const cartInput = document.getElementById("cartInput");
+      const item = cartInput.value.trim();
+
+      if (item === "") return;
+
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push(item);
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      cartInput.value = "";
+      loadCart();
+    }
+
+    // Auto load data after refresh
+    window.onload = function () {
+      showProducts();
+      loadTasks();
+      loadCart();
+    };
+  </script>
+</body>
+</html>

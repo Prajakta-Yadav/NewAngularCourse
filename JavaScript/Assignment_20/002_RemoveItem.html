@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Remove Item</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef2f3;
+      padding: 30px;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Remove Specific Item</h1>
+    <button id="storeBtn">Store Values</button>
+    <button id="removeBtn">Remove Age</button>
+    <p id="output"></p>
+  </div>
+
+  <script>
+    const storeBtn = document.getElementById("storeBtn");
+    const removeBtn = document.getElementById("removeBtn");
+    const output = document.getElementById("output");
+
+    storeBtn.addEventListener("click", function () {
+      localStorage.setItem("name", "Aman");
+      localStorage.setItem("age", "20");
+      localStorage.setItem("city", "Delhi");
+      output.textContent = "Stored name, age, and city.";
+    });
+
+    removeBtn.addEventListener("click", function () {
+      localStorage.removeItem("age");
+      output.textContent = "'age' removed from localStorage.";
+    });
+  </script>
+</body>
+</html>

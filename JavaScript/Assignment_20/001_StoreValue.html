@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Store Username</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+
+    body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  padding: 30px;
+}
+
+.container {
+  max-width: 400px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+input,
+button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Store Username in localStorage</h1>
+    <input type="text" id="usernameInput" placeholder="Enter username" />
+    <button id="saveBtn">Save Username</button>
+    <p id="output"></p>
+  </div>
+
+  <script>
+    const usernameInput = document.getElementById("usernameInput");
+const saveBtn = document.getElementById("saveBtn");
+const output = document.getElementById("output");
+
+window.onload = function () {
+  const savedUsername = localStorage.getItem("username");
+  if (savedUsername) {
+    output.textContent = "Saved Username: " + savedUsername;
+  }
+};
+
+saveBtn.addEventListener("click", function () {
+  const username = usernameInput.value.trim();
+  localStorage.setItem("username", username);
+  output.textContent = "Saved Username: " + username;
+});
+  </script>
+</body>
+</html>
