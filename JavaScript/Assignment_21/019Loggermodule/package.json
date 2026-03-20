@@ -1,0 +1,6 @@
+{
+  "name": "logger-assignment",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/app.js"
+}

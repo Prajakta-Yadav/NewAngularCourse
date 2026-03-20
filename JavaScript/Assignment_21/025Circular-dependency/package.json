@@ -1,0 +1,6 @@
+{
+  "name": "Circular-Dependency",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/app.js"
+}
