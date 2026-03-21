@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Optimize DOM Access</title>
+</head>
+<body>
+  <div id="box">Old Text</div>
+  <button onclick="updateBox()">Update Box</button>
+
+  <script>
+    function updateBox() {
+      const box = document.getElementById("box");
+
+      box.textContent = "Hello";
+      box.style.color = "blue";
+      box.style.backgroundColor = "yellow";
+      box.style.padding = "10px";
+    }
+  </script>
+</body>
+</html>

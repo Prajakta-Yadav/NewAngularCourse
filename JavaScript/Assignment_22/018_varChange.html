@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Trace Variable Changes</title>
+</head>
+<body>
+
+  <button onclick="startProcess()">Start</button>
+
+  <script>
+    let count = 0;
+
+    function updateCount(value) {
+      count += value;
+
+      console.log("Count updated:", count);
+      console.trace("Trace where count changed");
+    }
+
+    function stepOne() {
+      updateCount(5);
+    }
+
+    function stepTwo() {
+      updateCount(10);
+    }
+
+    function startProcess() {
+      stepOne();
+      stepTwo();
+    }
+  </script>
+
+</body>
+</html>

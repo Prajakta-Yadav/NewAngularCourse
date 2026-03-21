@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+  <button onclick="showUser()">Show User</button>
+
+  <script>
+    function showUser() {
+      const user = getUser();
+
+      // ❌ ERROR: user is undefined
+      console.log("User name:", user.name);
+    }
+    function getUser() {
+      // Simulating missing data
+      return undefined;
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reusable Helper Example</title>
+</head>
+<body>
+  <button onclick="showSuccess('Data saved successfully')">Show Success</button>
+  <button onclick="showError('Something went wrong')">Show Error</button>
+
+  <p id="output"></p>
+
+  <script>
+
+    /*    reoeated code 
+    function showSuccess(message) {
+  const output = document.getElementById("output");
+  output.textContent = message;
+  output.style.color = "green";
+  output.style.fontWeight = "bold";
+}
+
+function showError(message) {
+  const output = document.getElementById("output");
+  output.textContent = message;
+  output.style.color = "red";
+  output.style.fontWeight = "bold";
+}
+    */
+    function updateMessage(message, color) {
+      const output = document.getElementById("output");
+      output.textContent = message;
+      output.style.color = color;
+      output.style.fontWeight = "bold";
+    }
+
+    function showSuccess(message) {
+      updateMessage(message, "green");
+    }
+
+    function showError(message) {
+      updateMessage(message, "red");
+    }
+  </script>
+</body>
+</html>

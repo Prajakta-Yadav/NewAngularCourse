@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Validation</title>
+</head>
+<body>
+
+    <input type="text" id="email" placeholder="Enter email">
+    <button onclick="handleSubmit()">Submit</button>
+    <p id="error"></p>
+
+    <script>
+        // ✅ Reusable validation function
+        function validateEmail(email) {
+            const trimmedEmail = email.trim();
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (trimmedEmail === "") {
+                return {
+                    isValid: false,
+                    message: "Email is required"
+                };
+            }
+
+            if (!emailPattern.test(trimmedEmail)) {
+                return {
+                    isValid: false,
+                    message: "Please enter a valid email"
+                };
+            }
+
+            return {
+                isValid: true,
+                message: ""
+            };
+        }
+
+        // ✅ Form handler
+        function handleSubmit() {
+            const email = document.getElementById("email").value;
+            const error = document.getElementById("error");
+
+            const result = validateEmail(email);
+
+            if (!result.isValid) {
+                error.textContent = result.message;
+                error.style.color = "red";
+            } else {
+                error.textContent = "Valid email ✔";
+                error.style.color = "green";
+            }
+        }
+    </script>
+
+</body>
+</html>

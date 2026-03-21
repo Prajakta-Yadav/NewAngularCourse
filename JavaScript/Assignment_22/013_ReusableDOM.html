@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DOM Utilities</title>
+  <style>
+    .active {
+      background-color: green;
+      color: white;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="box">Hello</div>
+
+  <button onclick="makeActive()">Add Class</button>
+  <button onclick="removeActive()">Remove Class</button>
+  <button onclick="toggleActive()">Toggle Class</button>
+
+  <script>
+    function $(selector) {
+      return document.querySelector(selector);
+    }
+
+    function addClass(element, className) {
+      element.classList.add(className);
+    }
+
+    function removeClass(element, className) {
+      element.classList.remove(className);
+    }
+
+    function toggleClass(element, className) {
+      element.classList.toggle(className);
+    }
+
+    function makeActive() {
+      addClass($("#box"), "active");
+    }
+
+    function removeActive() {
+      removeClass($("#box"), "active");
+    }
+
+    function toggleActive() {
+      toggleClass($("#box"), "active");
+    }
+  </script>
+
+</body>
+</html>

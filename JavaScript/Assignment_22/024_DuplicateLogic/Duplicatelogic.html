@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Remove Duplicate Logic</title>
+</head>
+<body>
+  <button onclick="showSuccess()">Show Success</button>
+  <button onclick="showError()">Show Error</button>
+
+  <p id="message"></p>
+
+  <script>
+    function showSuccess() {
+      const messageBox = document.getElementById("message");
+      messageBox.textContent = "Data saved successfully";
+      messageBox.style.color = "green";
+      messageBox.style.fontWeight = "bold";
+    }
+
+    function showError() {
+      const messageBox = document.getElementById("message");
+      messageBox.textContent = "Failed to save data";
+      messageBox.style.color = "red";
+      messageBox.style.fontWeight = "bold";
+    }
+  </script>
+</body>
+</html>

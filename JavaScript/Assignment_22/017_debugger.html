@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Debugger Demo</title>
+</head>
+<body>
+
+  <button onclick="startApp()">Run Debugger</button>
+
+  <script>
+    function startApp() {
+      console.log("Start App");
+      processData();
+    }
+
+    function processData() {
+      console.log("Processing...");
+      calculate(10, 0);
+    }
+
+    function calculate(a, b) {
+      debugger; // ⛔ Execution will pause here
+
+      if (b === 0) {
+        throw new Error("Cannot divide by zero");
+      }
+
+      return a / b;
+    }
+  </script>
+
+</body>
+</html>

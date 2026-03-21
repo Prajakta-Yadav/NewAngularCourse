@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+  <button onclick="showUser()">Show User</button>
+
+  <script>
+    function getUser() {
+      return undefined; // simulate missing data
+    }
+
+    function showUser() {
+      const user = getUser();
+
+      console.log("User:", user);
+
+      // ✅ Safe handling
+      const name = user?.name ?? "User not available";
+
+      console.log("User name:", name);
+    }
+  </script>
+
+</body>
+</html>

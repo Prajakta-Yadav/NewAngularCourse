@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Optimize DOM Access</title>
+</head>
+<body>
+  <div id="box">Old Text</div>
+  <button onclick="updateBox()">Update Box</button>
+
+  <script>
+    /*
+    function updateBox() {
+  document.getElementById("box").textContent = "Hello";
+  document.getElementById("box").style.color = "blue";
+  document.getElementById("box").style.backgroundColor = "yellow";
+  document.getElementById("box").style.padding = "10px";
+}
+    */
+
+    function updateBox() {
+  const box = document.getElementById("box");
+
+  box.textContent = "Hello";
+  box.style.color = "blue";
+  box.style.backgroundColor = "yellow";
+  box.style.padding = "10px";
+}
+
+
+
+/*
+function showValue() {
+  console.log(document.getElementById("name").value);
+  document.getElementById("output").textContent = document.getElementById("name").value;
+}
+
+after
+function showValue() {
+  const nameInput = document.getElementById("name");
+  const output = document.getElementById("output");
+
+  const value = nameInput.value;
+  console.log(value);
+  output.textContent = value;
+}
+
+*/
+  </script>
+</body>
+</html>
