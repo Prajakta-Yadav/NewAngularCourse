@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JSON Parse Error</title>
+</head>
+<body>
+
+<button onclick="testParse()">Test JSON Parse</button>
+
+<script>
+  function testParse() {
+    // Store invalid JSON (missing quotes)
+    localStorage.setItem("data", "{name: John}");
+
+    let rawData = localStorage.getItem("data");
+
+    console.log("Stored:", rawData);
+
+    // ❌ This will crash
+    let parsed = JSON.parse(rawData);
+
+    console.log(parsed);
+  }
+</script>
+
+</body>
+</html>

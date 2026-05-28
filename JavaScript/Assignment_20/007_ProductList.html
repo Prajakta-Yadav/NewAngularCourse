@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Store Array in localStorage</title>
+</head>
+<body>
+
+  <h2>Add Product</h2>
+
+  <input type="text" id="product" placeholder="Enter product name">
+  <button onclick="addProduct()">Add Product</button>
+
+  <h3>Product List:</h3>
+  <ul id="productList"></ul>
+
+  <script>
+    // Add product to array and store
+    function addProduct() {
+      let productInput = document.getElementById("product").value.trim();
+
+      if (productInput === "") {
+        alert("⚠️ Please enter a valid product!");
+        return;
+      }
+
+      // Get existing products or empty array
+      let products = JSON.parse(localStorage.getItem("products")) || [];
+
+      // Add new product
+      products.push(productInput);
+
+      // Store updated array
+      localStorage.setItem("products", JSON.stringify(products));
+
+      document.getElementById("product").value = "";
+      displayProducts();
+    }
+
+    // Display products on page
+    function displayProducts() {
+      let products = JSON.parse(localStorage.getItem("products")) || [];
+      let list = document.getElementById("productList");
+
+      list.innerHTML = "";
+
+      products.forEach((item, index) => {
+        let li = document.createElement("li");
+        li.innerText = item;
+        list.appendChild(li);
+      });
+    }
+
+    // Load products on page refresh
+    window.onload = displayProducts;
+  </script>
+
+</body>
+</html>

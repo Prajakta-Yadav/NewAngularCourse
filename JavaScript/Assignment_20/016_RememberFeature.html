@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Remember Me Feature</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 380px;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+    }
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .checkbox-group input {
+      width: auto;
+      margin: 0;
+    }
+
+    button {
+      width: 100%;
+      padding: 11px;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    .login-btn {
+      background: #007bff;
+    }
+
+    .logout-btn {
+      background: #dc3545;
+    }
+
+    .message {
+      min-height: 22px;
+      font-weight: bold;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .success {
+      color: green;
+    }
+
+    .error {
+      color: red;
+    }
+
+    .warning {
+      color: #b26a00;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Login</h2>
+
+    <div class="form-group">
+      <input type="text" id="username" placeholder="Enter username">
+    </div>
+
+    <div class="form-group">
+      <input type="password" id="password" placeholder="Enter password">
+    </div>
+
+    <div class="checkbox-group">
+      <input type="checkbox" id="rememberMe">
+      <label for="rememberMe">Remember Me</label>
+    </div>
+
+    <button class="login-btn" onclick="login()">Login</button>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+
+    <p id="message" class="message"></p>
+  </div>
+
+  <script>
+    const validUsername = "admin";
+    const validPassword = "1234";
+
+    function setMessage(text, type) {
+      const msg = document.getElementById("message");
+      msg.innerText = text;
+      msg.className = "message " + type;
+    }
+
+    function login() {
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const rememberMe = document.getElementById("rememberMe").checked;
+
+      if (username === "" || password === "") {
+        setMessage("Please enter username and password.", "warning");
+        return;
+      }
+
+      if (username !== validUsername || password !== validPassword) {
+        setMessage("Invalid username or password.", "error");
+        return;
+      }
+
+      // Clear previous login data first
+      localStorage.removeItem("rememberUser");
+      localStorage.removeItem("rememberLogin");
+      sessionStorage.removeItem("rememberUser");
+      sessionStorage.removeItem("rememberLogin");
+
+      if (rememberMe) {
+        localStorage.setItem("rememberUser", username);
+        localStorage.setItem("rememberLogin", "true");
+      } else {
+        sessionStorage.setItem("rememberUser", username);
+        sessionStorage.setItem("rememberLogin", "true");
+      }
+
+      setMessage("Login successful! Welcome, " + username, "success");
+    }
+
+    function logout() {
+      const isLoggedIn =
+        localStorage.getItem("rememberLogin") === "true" ||
+        sessionStorage.getItem("rememberLogin") === "true";
+
+      if (!isLoggedIn) {
+        setMessage("Please login first.", "warning");
+        return;
+      }
+
+      localStorage.removeItem("rememberUser");
+      localStorage.removeItem("rememberLogin");
+      sessionStorage.removeItem("rememberUser");
+      sessionStorage.removeItem("rememberLogin");
+
+      document.getElementById("username").value = "";
+      document.getElementById("password").value = "";
+      document.getElementById("rememberMe").checked = false;
+
+      setMessage("Logged out successfully.", "success");
+    }
+
+    function checkLoginOnLoad() {
+      const localUser = localStorage.getItem("rememberUser");
+      const sessionUser = sessionStorage.getItem("rememberUser");
+
+      if (localUser) {
+        setMessage("Logged in as: " + localUser + " (saved in localStorage)", "success");
+      } else if (sessionUser) {
+        setMessage("Logged in as: " + sessionUser + " (saved in sessionStorage)", "success");
+      }
+    }
+
+    window.onload = checkLoginOnLoad;
+  </script>
+
+</body>
+</html>

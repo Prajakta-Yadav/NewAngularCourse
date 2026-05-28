@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Product View History</title>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+      background: #f4f7fb;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    button {
+      padding: 8px 12px;
+      margin: 5px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background: #007bff;
+      color: white;
+    }
+
+    .history {
+      margin-top: 20px;
+    }
+
+    .item {
+      padding: 8px;
+      border-bottom: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>🛍️ Product List</h2>
+
+  <!-- Sample products -->
+  <button onclick="viewProduct('Laptop')">Laptop</button>
+  <button onclick="viewProduct('Phone')">Phone</button>
+  <button onclick="viewProduct('Shoes')">Shoes</button>
+  <button onclick="viewProduct('Watch')">Watch</button>
+  <button onclick="viewProduct('Headphones')">Headphones</button>
+  <button onclick="viewProduct('Camera')">Camera</button>
+
+  <div class="history">
+    <h3>Recently Viewed</h3>
+    <div id="historyList"></div>
+  </div>
+</div>
+
+<script>
+  const LIMIT = 5; // max items to store
+
+  function getHistory() {
+    return JSON.parse(localStorage.getItem("viewHistory")) || [];
+  }
+
+  function saveHistory(history) {
+    localStorage.setItem("viewHistory", JSON.stringify(history));
+  }
+
+  function viewProduct(productName) {
+    let history = getHistory();
+
+    // Remove if already exists (avoid duplicates)
+    history = history.filter(item => item !== productName);
+
+    // Add to beginning
+    history.unshift(productName);
+
+    // Limit array length
+    if (history.length > LIMIT) {
+      history.pop();
+    }
+
+    saveHistory(history);
+    displayHistory();
+  }
+
+  function displayHistory() {
+    let history = getHistory();
+    let container = document.getElementById("historyList");
+
+    container.innerHTML = "";
+
+    if (history.length === 0) {
+      container.innerHTML = "No products viewed yet.";
+      return;
+    }
+
+    history.forEach(item => {
+      let div = document.createElement("div");
+      div.className = "item";
+      div.innerText = item;
+      container.appendChild(div);
+    });
+
+    console.log("View History:", history);
+  }
+
+  window.onload = displayHistory;
+</script>
+
+</body>
+</html>

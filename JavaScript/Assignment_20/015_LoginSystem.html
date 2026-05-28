@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login System with localStorage</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+      background: #fff;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+    }
+
+    h2, h3 {
+      text-align: center;
+      margin-bottom: 12px;
+      color: #222;
+    }
+
+    .section {
+      margin-bottom: 24px;
+      padding: 16px;
+      border: 1px solid #e3e3e3;
+      border-radius: 10px;
+      background: #fafafa;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 6px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #4a90e2;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 14px;
+      padding: 11px;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+      color: white;
+    }
+
+    .register-btn {
+      background: #28a745;
+    }
+
+    .login-btn {
+      background: #007bff;
+    }
+
+    .clear-btn {
+      background: #dc3545;
+    }
+
+    .error {
+      color: #d93025;
+      font-size: 13px;
+      margin-top: 5px;
+      min-height: 16px;
+    }
+
+    .message {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 14px;
+      display: none;
+    }
+
+    .success {
+      background: #e6f7ec;
+      color: #1e7e34;
+      border: 1px solid #b7ebc6;
+    }
+
+    .warning {
+      background: #fff4e5;
+      color: #a15c00;
+      border: 1px solid #ffd8a8;
+    }
+
+    .users-box {
+      margin-top: 18px;
+      padding: 14px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #f8f9fb;
+    }
+
+    .users-box ul {
+      margin: 10px 0 0;
+      padding-left: 18px;
+    }
+
+    .users-box li {
+      margin: 6px 0;
+    }
+
+    .note {
+      font-size: 13px;
+      color: #666;
+      text-align: center;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Login System using localStorage</h2>
+
+    <div class="section">
+      <h3>Register</h3>
+
+      <label for="regUsername">Username</label>
+      <input type="text" id="regUsername" placeholder="Enter username" />
+      <div class="error" id="regUsernameError"></div>
+
+      <label for="regPassword">Password</label>
+      <input type="password" id="regPassword" placeholder="Enter password" />
+      <div class="error" id="regPasswordError"></div>
+
+      <button class="register-btn" onclick="registerUser()">Register</button>
+    </div>
+
+    <div class="section">
+      <h3>Login</h3>
+
+      <label for="loginUsername">Username</label>
+      <input type="text" id="loginUsername" placeholder="Enter username" />
+      <div class="error" id="loginUsernameError"></div>
+
+      <label for="loginPassword">Password</label>
+      <input type="password" id="loginPassword" placeholder="Enter password" />
+      <div class="error" id="loginPasswordError"></div>
+
+      <button class="login-btn" onclick="loginUser()">Login</button>
+      <button class="clear-btn" onclick="clearUsers()">Clear All Users</button>
+    </div>
+
+    <div class="message" id="statusMessage"></div>
+
+    <div class="users-box">
+      <h3>Registered Users</h3>
+      <ul id="userList"></ul>
+      <p class="note">Users are stored in localStorage as an array.</p>
+    </div>
+  </div>
+
+  <script>
+    function getUsers() {
+      return JSON.parse(localStorage.getItem("users")) || [];
+    }
+
+    function saveUsers(users) {
+      localStorage.setItem("users", JSON.stringify(users));
+    }
+
+    function showMessage(message, type) {
+      const box = document.getElementById("statusMessage");
+      box.style.display = "block";
+      box.className = "message " + type;
+      box.innerText = message;
+    }
+
+    function clearRegisterErrors() {
+      document.getElementById("regUsernameError").innerText = "";
+      document.getElementById("regPasswordError").innerText = "";
+    }
+
+    function clearLoginErrors() {
+      document.getElementById("loginUsernameError").innerText = "";
+      document.getElementById("loginPasswordError").innerText = "";
+    }
+
+    function displayUsers() {
+      const users = getUsers();
+      const list = document.getElementById("userList");
+      list.innerHTML = "";
+
+      if (users.length === 0) {
+        list.innerHTML = "<li>No registered users found.</li>";
+        return;
+      }
+
+      users.forEach(function(user, index) {
+        const li = document.createElement("li");
+        li.innerText = (index + 1) + ". " + user.username;
+        list.appendChild(li);
+      });
+
+      console.log("Stored Users:", users);
+    }
+
+    function registerUser() {
+      clearRegisterErrors();
+
+      const username = document.getElementById("regUsername").value.trim();
+      const password = document.getElementById("regPassword").value.trim();
+
+      let isValid = true;
+
+      if (username === "") {
+        document.getElementById("regUsernameError").innerText = "Please enter username.";
+        isValid = false;
+      }
+
+      if (password === "") {
+        document.getElementById("regPasswordError").innerText = "Please enter password.";
+        isValid = false;
+      }
+
+      if (!isValid) {
+        showMessage("Please fill all registration fields.", "warning");
+        return;
+      }
+
+      const users = getUsers();
+
+      const existingUser = users.find(function(user) {
+        return user.username === username;
+      });
+
+      if (existingUser) {
+        showMessage("Username already exists. Try another username.", "warning");
+        return;
+      }
+
+      users.push({
+        username: username,
+        password: password
+      });
+
+      saveUsers(users);
+
+      document.getElementById("regUsername").value = "";
+      document.getElementById("regPassword").value = "";
+
+      showMessage("User registered successfully.", "success");
+      displayUsers();
+    }
+
+    function loginUser() {
+      clearLoginErrors();
+
+      const username = document.getElementById("loginUsername").value.trim();
+      const password = document.getElementById("loginPassword").value.trim();
+
+      let isValid = true;
+
+      if (username === "") {
+        document.getElementById("loginUsernameError").innerText = "Please enter username.";
+        isValid = false;
+      }
+
+      if (password === "") {
+        document.getElementById("loginPasswordError").innerText = "Please enter password.";
+        isValid = false;
+      }
+
+      if (!isValid) {
+        showMessage("Please fill all login fields.", "warning");
+        return;
+      }
+
+      const users = getUsers();
+
+      const matchedUser = users.find(function(user) {
+        return user.username === username && user.password === password;
+      });
+
+      if (matchedUser) {
+        showMessage("Login successful. Welcome, " + matchedUser.username + "!", "success");
+      } else {
+        showMessage("Invalid username or password.", "warning");
+      }
+    }
+
+    function clearUsers() {
+      localStorage.removeItem("users");
+      showMessage("All stored users cleared successfully.", "warning");
+      displayUsers();
+    }
+
+    window.onload = function() {
+      displayUsers();
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopSphere | Login & Register</title>
+  <link rel="icon" href="data:,">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg sticky-top shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">ShopSphere</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto me-3">
+          <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+          <li class="nav-item"><a class="nav-link" href="cart.html">Cart <span class="badge text-bg-primary" data-cart-count>0</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+        <button class="btn btn-outline-secondary btn-sm" data-theme-toggle><span data-theme-label>Dark mode</span></button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-5">
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="card product-card p-4">
+          <h1 class="h3 mb-3">Login</h1>
+          <div id="pageLoginMessage" class="alert d-none"></div>
+          <form id="pageLoginForm" novalidate>
+            <div class="mb-3"><label class="form-label">Email</label><input id="pageLoginEmail" type="email" class="form-control"></div>
+            <div class="mb-3"><label class="form-label">Password</label><input id="pageLoginPassword" type="password" class="form-control"></div>
+            <button class="btn btn-primary w-100">Login</button>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card product-card p-4">
+          <h2 class="h3 mb-3">Register</h2>
+          <div id="registerMessage" class="alert d-none"></div>
+          <form id="registerForm" novalidate>
+            <div class="mb-3"><label class="form-label">Full Name</label><input id="registerName" type="text" class="form-control"></div>
+            <div class="mb-3"><label class="form-label">Email</label><input id="registerEmail" type="email" class="form-control"></div>
+            <div class="mb-3"><label class="form-label">Password</label><input id="registerPassword" type="password" class="form-control"></div>
+            <div class="mb-3"><label class="form-label">Confirm Password</label><input id="confirmPassword" type="password" class="form-control"></div>
+            <button class="btn btn-success w-100">Create Account</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="border-top py-4 mt-5"><div class="container">© <span data-year></span> ShopSphere</div></footer>
+  <button id="backToTop" class="btn btn-primary rounded-circle back-to-top">↑</button>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

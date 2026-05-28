@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Session Based Form Data Saver</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #222;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #4a90e2;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    .error {
+      color: #d93025;
+      font-size: 13px;
+      margin-top: 5px;
+      min-height: 16px;
+    }
+
+    .message {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 14px;
+      display: none;
+    }
+
+    .success {
+      background: #e6f7ec;
+      color: #1e7e34;
+      border: 1px solid #b7ebc6;
+    }
+
+    .warning {
+      background: #fff4e5;
+      color: #a15c00;
+      border: 1px solid #ffd8a8;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    button {
+      flex: 1;
+      padding: 11px;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .save-btn {
+      background: #4a90e2;
+      color: white;
+    }
+
+    .clear-btn {
+      background: #e74c3c;
+      color: white;
+    }
+
+    .saved-box {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f8f9fb;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+
+    .saved-box h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      color: #222;
+    }
+
+    .saved-box p {
+      margin: 6px 0;
+      color: #444;
+    }
+
+    .note {
+      margin-top: 15px;
+      font-size: 13px;
+      color: #666;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Session Based Form Saver</h2>
+    <p class="subtitle">Form data is saved temporarily in sessionStorage.</p>
+
+    <div class="form-group">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="Enter your name" />
+      <div class="error" id="nameError"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" placeholder="Enter your email" />
+      <div class="error" id="emailError"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone Number</label>
+      <input type="text" id="phone" placeholder="Enter your phone number" />
+      <div class="error" id="phoneError"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="messageInput">Message</label>
+      <textarea id="messageInput" placeholder="Enter your message"></textarea>
+      <div class="error" id="messageError"></div>
+    </div>
+
+    <div class="btn-group">
+      <button class="save-btn" onclick="saveFormData()">Save Data</button>
+      <button class="clear-btn" onclick="clearFormData()">Clear Data</button>
+    </div>
+
+    <div class="message" id="statusMessage"></div>
+
+    <div class="saved-box">
+      <h3>Saved Data</h3>
+      <p><strong>Name:</strong> <span id="savedName">-</span></p>
+      <p><strong>Email:</strong> <span id="savedEmail">-</span></p>
+      <p><strong>Phone:</strong> <span id="savedPhone">-</span></p>
+      <p><strong>Message:</strong> <span id="savedMessage">-</span></p>
+    </div>
+
+    <p class="note">
+      Data remains during refresh/navigation in the same tab and clears after the tab is closed.
+    </p>
+  </div>
+
+  <script>
+    function showStatus(message, type) {
+      const statusBox = document.getElementById("statusMessage");
+      statusBox.style.display = "block";
+      statusBox.className = "message " + type;
+      statusBox.innerText = message;
+    }
+
+    function clearErrors() {
+      document.getElementById("nameError").innerText = "";
+      document.getElementById("emailError").innerText = "";
+      document.getElementById("phoneError").innerText = "";
+      document.getElementById("messageError").innerText = "";
+    }
+
+    function validateForm() {
+      clearErrors();
+
+      let isValid = true;
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const message = document.getElementById("messageInput").value.trim();
+
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const phonePattern = /^[0-9]{10}$/;
+
+      if (name === "") {
+        document.getElementById("nameError").innerText = "Please enter your name.";
+        isValid = false;
+      }
+
+      if (email === "") {
+        document.getElementById("emailError").innerText = "Please enter your email.";
+        isValid = false;
+      } else if (!emailPattern.test(email)) {
+        document.getElementById("emailError").innerText = "Please enter a valid email address.";
+        isValid = false;
+      }
+
+      if (phone === "") {
+        document.getElementById("phoneError").innerText = "Please enter your phone number.";
+        isValid = false;
+      } else if (!phonePattern.test(phone)) {
+        document.getElementById("phoneError").innerText = "Phone number must be 10 digits.";
+        isValid = false;
+      }
+
+      if (message === "") {
+        document.getElementById("messageError").innerText = "Please enter your message.";
+        isValid = false;
+      }
+
+      return isValid;
+    }
+
+    function displaySavedData(data) {
+      document.getElementById("savedName").innerText = data.name || "-";
+      document.getElementById("savedEmail").innerText = data.email || "-";
+      document.getElementById("savedPhone").innerText = data.phone || "-";
+      document.getElementById("savedMessage").innerText = data.message || "-";
+    }
+
+    function saveFormData() {
+      if (!validateForm()) {
+        showStatus("Please fix the errors before saving.", "warning");
+        return;
+      }
+
+      const formData = {
+        name: document.getElementById("name").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        phone: document.getElementById("phone").value.trim(),
+        message: document.getElementById("messageInput").value.trim()
+      };
+
+      sessionStorage.setItem("formData", JSON.stringify(formData));
+
+      displaySavedData(formData);
+      showStatus("Data saved successfully in sessionStorage.", "success");
+      console.log("Saved Form Data:", formData);
+    }
+
+    function loadFormData() {
+      const savedData = sessionStorage.getItem("formData");
+
+      if (!savedData) {
+        return;
+      }
+
+      const formData = JSON.parse(savedData);
+
+      document.getElementById("name").value = formData.name || "";
+      document.getElementById("email").value = formData.email || "";
+      document.getElementById("phone").value = formData.phone || "";
+      document.getElementById("messageInput").value = formData.message || "";
+
+      displaySavedData(formData);
+      console.log("Loaded Form Data:", formData);
+    }
+
+    function clearFormData() {
+      document.getElementById("name").value = "";
+      document.getElementById("email").value = "";
+      document.getElementById("phone").value = "";
+      document.getElementById("messageInput").value = "";
+
+      sessionStorage.removeItem("formData");
+
+      clearErrors();
+      displaySavedData({
+        name: "",
+        email: "",
+        phone: "",
+        message: ""
+      });
+
+      showStatus("Saved form data cleared successfully.", "warning");
+      console.log("Form data cleared from sessionStorage.");
+    }
+
+    window.onload = function () {
+      loadFormData();
+    };
+  </script>
+</body>
+</html>

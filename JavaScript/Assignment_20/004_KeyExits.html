@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Validation with localStorage</title>
+</head>
+<body>
+
+  <h2>Enter Username</h2>
+
+  <input type="text" id="username" placeholder="Enter username">
+  <button onclick="storeData()">Store Username</button>
+  <button onclick="checkUser()">Check Username</button>
+
+  <p id="output"></p>
+
+  <script>
+    // Store username with validation
+    function storeData() {
+      let username = document.getElementById("username").value.trim();
+
+      if (username === "") {
+        document.getElementById("output").innerText = "⚠️ Please enter a valid username!";
+        return;
+      }
+
+      localStorage.setItem("username", username);
+      document.getElementById("output").innerText = "✅ Username stored successfully!";
+    }
+
+    // Check if username exists
+    function checkUser() {
+      let storedName = localStorage.getItem("username");
+
+      if (storedName === null) {
+        document.getElementById("output").innerText = "❌ Username not found in localStorage";
+      } else {
+        document.getElementById("output").innerText = "✅ Username exists: " + storedName;
+      }
+    }
+  </script>
+
+</body>
+</html>

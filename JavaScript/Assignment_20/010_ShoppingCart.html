@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shopping Cart</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    input, button {
+      padding: 8px;
+      margin: 5px 0;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      margin: 8px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    #message {
+      margin-top: 15px;
+      font-weight: bold;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🛒 Shopping Cart</h2>
+
+  <input type="text" id="itemName" placeholder="Enter item name"><br>
+  <input type="number" id="itemPrice" placeholder="Enter item price"><br>
+
+  <button onclick="addToCart()">Add to Cart</button>
+
+  <h3>Cart Items:</h3>
+  <ul id="cartList"></ul>
+
+  <h3 id="totalAmount">Total: ₹0</h3>
+
+  <button onclick="buyNow()">Buy</button>
+  <button onclick="placeOrder()">Place Order</button>
+
+  <p id="message"></p>
+
+  <script>
+    function getCart() {
+      return JSON.parse(localStorage.getItem("cart")) || [];
+    }
+
+    function saveCart(cart) {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
+
+    function addToCart() {
+      let name = document.getElementById("itemName").value.trim();
+      let price = document.getElementById("itemPrice").value;
+
+      if (name === "" || price === "") {
+        document.getElementById("message").innerText = "⚠️ Please enter valid item details!";
+        return;
+      }
+
+      let cart = getCart();
+
+      let item = {
+        name: name,
+        price: parseFloat(price)
+      };
+
+      cart.push(item);
+      saveCart(cart);
+
+      document.getElementById("itemName").value = "";
+      document.getElementById("itemPrice").value = "";
+      document.getElementById("message").innerText = "";
+
+      displayCart();
+    }
+
+    function displayCart() {
+      let cart = getCart();
+      let list = document.getElementById("cartList");
+      let total = 0;
+
+      list.innerHTML = "";
+
+      cart.forEach((item, index) => {
+        total += item.price;
+
+        let li = document.createElement("li");
+        li.innerHTML = `
+          ${item.name} - ₹${item.price}
+          <button onclick="removeItem(${index})">Remove</button>
+        `;
+        list.appendChild(li);
+      });
+
+      document.getElementById("totalAmount").innerText = "Total: ₹" + total;
+    }
+
+    function removeItem(index) {
+      let cart = getCart();
+      cart.splice(index, 1);
+      saveCart(cart);
+      displayCart();
+    }
+
+    function buyNow() {
+      let cart = getCart();
+
+      if (cart.length === 0) {
+        document.getElementById("message").innerText = "⚠️ Your cart is empty!";
+        return;
+      }
+
+      document.getElementById("message").innerText = "🛍️ Ready to buy. Click 'Place Order' to continue.";
+    }
+
+    function placeOrder() {
+      let cart = getCart();
+
+      if (cart.length === 0) {
+        document.getElementById("message").innerText = "⚠️ Your cart is empty!";
+        return;
+      }
+
+      document.getElementById("message").innerText = "✅ Payment successful! Your order has been placed.";
+
+      localStorage.removeItem("cart");
+      displayCart();
+    }
+
+    window.onload = displayCart;
+  </script>
+
+</body>
+</html>

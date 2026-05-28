@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Store Object in localStorage</title>
+</head>
+<body>
+
+  <h2>Store User Object</h2>
+
+  <input type="text" id="name" placeholder="Enter name"><br><br>
+  <input type="number" id="age" placeholder="Enter age"><br><br>
+
+  <button onclick="storeUser()">Store User</button>
+  <button onclick="getUser()">Get User</button>
+
+  <p id="output"></p>
+
+  <script>
+    // Store object
+    function storeUser() {
+      let name = document.getElementById("name").value.trim();
+      let age = document.getElementById("age").value;
+
+      if (name === "" || age === "") {
+        document.getElementById("output").innerText = "⚠️ Please enter valid details!";
+        return;
+      }
+
+      let user = {
+        name: name,
+        age: age
+      };
+
+      // Convert object to JSON string
+      localStorage.setItem("user", JSON.stringify(user));
+
+      document.getElementById("output").innerText = "✅ User stored successfully!";
+    }
+
+    // Retrieve object
+    function getUser() {
+      let storedUser = localStorage.getItem("user");
+
+      if (storedUser === null) {
+        document.getElementById("output").innerText = "❌ No user found!";
+        return;
+      }
+
+      // Convert JSON string back to object
+      let userObj = JSON.parse(storedUser);
+
+      document.getElementById("output").innerText =
+        "Name: " + userObj.name + ", Age: " + userObj.age;
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>localStorage Expiry</title>
+</head>
+<body>
+
+  <h2>Store Data with Expiry</h2>
+
+  <input type="text" id="userData" placeholder="Enter some data">
+  <button onclick="saveData()">Save for 10 seconds</button>
+  <button onclick="loadData()">Load Data</button>
+
+  <p id="output"></p>
+
+  <script>
+    function saveData() {
+      let value = document.getElementById("userData").value.trim();
+
+      if (value === "") {
+        document.getElementById("output").innerText = "Please enter valid data.";
+        return;
+      }
+
+      let dataObject = {
+        value: value,
+        expiry: Date.now() + 10000 // 10 seconds from now
+      };
+
+      localStorage.setItem("tempData", JSON.stringify(dataObject));
+      document.getElementById("output").innerText = "Data saved successfully for 10 seconds.";
+    }
+
+    function loadData() {
+      let storedData = localStorage.getItem("tempData");
+
+      if (!storedData) {
+        document.getElementById("output").innerText = "No data found.";
+        return;
+      }
+
+      let parsedData = JSON.parse(storedData);
+
+      if (Date.now() > parsedData.expiry) {
+        localStorage.removeItem("tempData");
+        document.getElementById("output").innerText = "Stored data has expired.";
+      } else {
+        document.getElementById("output").innerText = "Saved Data: " + parsedData.value;
+      }
+    }
+  </script>
+
+</body>
+</html>

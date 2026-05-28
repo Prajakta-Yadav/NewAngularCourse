@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Update User Object</title>
+</head>
+<body>
+
+  <h2>Update User Info</h2>
+
+  <input type="text" id="name" placeholder="Enter new name"><br><br>
+  <input type="number" id="age" placeholder="Enter new age"><br><br>
+
+  <button onclick="storeUser()">Store User</button>
+  <button onclick="updateUser()">Update User</button>
+  <button onclick="showUser()">Show User</button>
+
+  <p id="output"></p>
+
+  <script>
+    // Store initial user
+    function storeUser() {
+      let user = {
+        name: "John",
+        age: 25
+      };
+      localStorage.setItem("user", JSON.stringify(user));
+      document.getElementById("output").innerText = "✅ Default user stored!";
+    }
+
+    // Update only if new value is provided
+    function updateUser() {
+      let storedUser = localStorage.getItem("user");
+
+      if (!storedUser) {
+        document.getElementById("output").innerText = "❌ No user found!";
+        return;
+      }
+
+      let userObj = JSON.parse(storedUser);
+
+      let newName = document.getElementById("name").value.trim();
+      let newAge = document.getElementById("age").value;
+
+      // Update only if user entered new value
+      if (newName !== "") {
+        userObj.name = newName;
+      }
+
+      if (newAge !== "") {
+        userObj.age = newAge;
+      }
+
+      // If both empty → no update
+      if (newName === "" && newAge === "") {
+        document.getElementById("output").innerText = "⚠️ Enter at least one value to update!";
+        return;
+      }
+
+      // Save updated object
+      localStorage.setItem("user", JSON.stringify(userObj));
+
+      document.getElementById("output").innerText = "✅ User updated successfully!";
+    }
+
+    // Show user
+    function showUser() {
+      let storedUser = localStorage.getItem("user");
+
+      if (!storedUser) {
+        document.getElementById("output").innerText = "❌ No user found!";
+        return;
+      }
+
+      let userObj = JSON.parse(storedUser);
+
+      document.getElementById("output").innerText =
+        "Name: " + userObj.name + ", Age: " + userObj.age;
+    }
+  </script>
+
+</body>
+</html>

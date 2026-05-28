@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LocalStorage Input Example</title>
+</head>
+<body>
+
+  <h2>Enter User Details</h2>
+
+  <input type="text" id="username" placeholder="Enter username"><br><br>
+  <input type="text" id="email" placeholder="Enter email"><br><br>
+  <input type="text" id="city" placeholder="Enter city"><br><br>
+
+  <button onclick="storeData()">Store Data</button>
+  <button onclick="removeEmail()">Remove Email</button>
+
+  <h3>Stored Data:</h3>
+  <p id="output"></p>
+
+  <script>
+    // Store data from user input
+    function storeData() {
+      let username = document.getElementById("username").value;
+      let email = document.getElementById("email").value;
+      let city = document.getElementById("city").value;
+
+      localStorage.setItem("username", username);
+      localStorage.setItem("email", email);
+      localStorage.setItem("city", city);
+
+      showData();
+    }
+
+    // Remove only email
+    function removeEmail() {
+      localStorage.removeItem("email");
+      showData();
+    }
+
+    // Display stored data
+    function showData() {
+      let username = localStorage.getItem("username");
+      let email = localStorage.getItem("email");
+      let city = localStorage.getItem("city");
+
+      document.getElementById("output").innerHTML =
+        "Username: " + (username || "") + "<br>" +
+        "Email: " + (email || "Removed") + "<br>" +
+        "City: " + (city || "");
+    }
+
+    // Load data on refresh
+    window.onload = showData;
+  </script>
+
+</body>
+</html>

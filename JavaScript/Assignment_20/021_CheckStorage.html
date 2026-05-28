@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Check Storage</title>
+</head>
+<body>
+
+<h2>Check localStorage Size</h2>
+
+<button onclick="getStorageSize()">Check Storage</button>
+
+<script>
+  function getStorageSize() {
+    let total = 0;
+
+    for (let key in localStorage) {
+      if (localStorage.hasOwnProperty(key)) {
+        total += localStorage[key].length;
+      }
+    }
+
+    console.log("Storage used:", (total / 1024).toFixed(2), "KB");
+    alert("Storage used: " + (total / 1024).toFixed(2) + " KB");
+  }
+</script>
+
+</body>
+</html>

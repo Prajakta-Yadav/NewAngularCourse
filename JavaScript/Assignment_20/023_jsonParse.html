@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Safe JSON Parse</title>
+</head>
+<body>
+
+<button onclick="safeParse()">Safe Parse</button>
+
+<script>
+  function safeParse() {
+    localStorage.setItem("data", "{name: John}"); // invalid JSON
+
+    let rawData = localStorage.getItem("data");
+
+    try {
+      let parsed = JSON.parse(rawData);
+      console.log("Parsed:", parsed);
+    } catch (error) {
+      console.error("❌ JSON parse failed:", error.message);
+      alert("Invalid JSON data!");
+    }
+  }
+</script>
+
+</body>
+</html>

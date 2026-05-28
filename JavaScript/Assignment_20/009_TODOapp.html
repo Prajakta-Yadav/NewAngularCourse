@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>To-Do App with Date and Time</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    input, button {
+      padding: 8px;
+      margin: 5px 0;
+    }
+
+    ul {
+      padding: 0;
+      list-style: none;
+    }
+
+    li {
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .completed {
+      text-decoration: line-through;
+      color: gray;
+    }
+
+    .deadline {
+      display: block;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    .task-buttons button {
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>📝 To-Do List</h2>
+
+  <input type="text" id="taskInput" placeholder="Enter task"><br>
+  <input type="date" id="deadlineDate"><br>
+  <input type="time" id="deadlineTime"><br>
+  <button onclick="addTask()">Add Task</button>
+
+  <ul id="taskList"></ul>
+
+  <script>
+    function getTasks() {
+      return JSON.parse(localStorage.getItem("tasks")) || [];
+    }
+
+    function saveTasks(tasks) {
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+
+    function addTask() {
+      let taskText = document.getElementById("taskInput").value.trim();
+      let deadlineDate = document.getElementById("deadlineDate").value;
+      let deadlineTime = document.getElementById("deadlineTime").value;
+
+      if (taskText === "") {
+        alert("Please enter a valid task.");
+        return;
+      }
+
+      let tasks = getTasks();
+
+      let taskObj = {
+        text: taskText,
+        date: deadlineDate,
+        time: deadlineTime,
+        completed: false
+      };
+
+      tasks.push(taskObj);
+      saveTasks(tasks);
+
+      document.getElementById("taskInput").value = "";
+      document.getElementById("deadlineDate").value = "";
+      document.getElementById("deadlineTime").value = "";
+
+      displayTasks();
+    }
+
+    function toggleComplete(index) {
+      let tasks = getTasks();
+      tasks[index].completed = !tasks[index].completed;
+      saveTasks(tasks);
+      displayTasks();
+    }
+
+    function deleteTask(index) {
+      let tasks = getTasks();
+      tasks.splice(index, 1);
+      saveTasks(tasks);
+      displayTasks();
+    }
+
+    function displayTasks() {
+      let tasks = getTasks();
+      let taskList = document.getElementById("taskList");
+
+      taskList.innerHTML = "";
+
+      tasks.forEach((task, index) => {
+        let li = document.createElement("li");
+        let taskClass = task.completed ? "completed" : "";
+
+        li.innerHTML = `
+          <span class="${taskClass}">${task.text}</span>
+          <span class="deadline ${taskClass}">
+            Deadline: ${task.date || "No date"} ${task.time || ""}
+          </span>
+          <div class="task-buttons">
+            <button onclick="toggleComplete(${index})">
+              ${task.completed ? "Undo" : "Complete"}
+            </button>
+            <button onclick="deleteTask(${index})">Delete</button>
+          </div>
+        `;
+
+        taskList.appendChild(li);
+      });
+    }
+
+    window.onload = displayTasks;
+  </script>
+
+</body>
+</html>

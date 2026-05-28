@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Store Function Test</title>
+</head>
+<body>
+
+<button onclick="storeFunction()">Store Function</button>
+<button onclick="getFunction()">Get Function</button>
+
+<script>
+  function storeFunction() {
+    let myFunc = function() {
+      alert("Hello from function!");
+    };
+
+    // Try to store function
+    localStorage.setItem("func", myFunc);
+
+    console.log("Stored value:", localStorage.getItem("func"));
+  }
+
+  function getFunction() {
+    let stored = localStorage.getItem("func");
+    console.log("Retrieved:", stored);
+
+    alert("Check console to see stored function");
+  }
+</script>
+
+</body>
+</html>

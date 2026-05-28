@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Clear LocalStorage</title>
+</head>
+<body>
+
+  <h2>LocalStorage Clear Example</h2>
+
+  <input type="text" id="username" placeholder="Enter username"><br><br>
+  <input type="text" id="email" placeholder="Enter email"><br><br>
+
+  <button onclick="storeData()">Store Data</button>
+  <button onclick="clearAll()">Clear All Data</button>
+
+  <h3>Stored Data:</h3>
+  <p id="output"></p>
+
+  <script>
+    // Store data
+    function storeData() {
+      let username = document.getElementById("username").value;
+      let email = document.getElementById("email").value;
+
+      localStorage.setItem("username", username);
+      localStorage.setItem("email", email);
+
+      showData();
+    }
+
+    // Clear entire localStorage
+    function clearAll() {
+      localStorage.clear();
+      showData();
+    }
+
+    // Display data
+    function showData() {
+      let username = localStorage.getItem("username");
+      let email = localStorage.getItem("email");
+
+      document.getElementById("output").innerHTML =
+        "Username: " + (username || "") + "<br>" +
+        "Email: " + (email || "");
+    }
+
+    // Load data on refresh
+    window.onload = showData;
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>localStorage Limit Test</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      padding: 30px;
+      background: #f4f7fb;
+    }
+
+    button {
+      padding: 12px 18px;
+      margin: 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      color: white;
+      font-size: 16px;
+    }
+
+    .fill { background: #28a745; }
+    .clear { background: #dc3545; }
+
+    #output {
+      margin-top: 20px;
+      font-weight: bold;
+      white-space: pre-line;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>📦 localStorage Limit Test</h2>
+
+  <button class="fill" onclick="fillStorage()">Fill Storage</button>
+  <button class="clear" onclick="clearStorage()">Clear Storage</button>
+
+  <p id="output"></p>
+
+  <script>
+    function fillStorage() {
+      let data = "a"; // start small
+      let count = 0;
+
+      try {
+        while (true) {
+          data += data; // double size each loop
+          localStorage.setItem("testData", data);
+          count++;
+
+          document.getElementById("output").innerText =
+            "Filling storage...\nIterations: " + count +
+            "\nApprox size: " + (data.length / 1024).toFixed(2) + " KB";
+        }
+      } catch (e) {
+        if (e.name === "QuotaExceededError") {
+          document.getElementById("output").innerText =
+            "❌ Storage limit reached!\n\n" +
+            "Final size: " + (data.length / 1024).toFixed(2) + " KB\n" +
+            "Iterations: " + count;
+        } else {
+          console.error(e);
+        }
+      }
+    }
+
+    function clearStorage() {
+      localStorage.clear();
+      document.getElementById("output").innerText = "🧹 Storage cleared!";
+    }
+  </script>
+
+</body>
+</html>

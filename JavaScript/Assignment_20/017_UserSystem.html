@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Preference System</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      transition: background 0.3s, color 0.3s;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    body.light {
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    body.dark {
+      background: #1f1f1f;
+      color: #ffffff;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 450px;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+    }
+
+    body.dark .container {
+      background: #2d2d2d;
+      color: white;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 18px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 11px;
+      border: none;
+      border-radius: 8px;
+      background: #007bff;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .message {
+      margin-top: 15px;
+      text-align: center;
+      font-weight: bold;
+      min-height: 24px;
+    }
+
+    .preview-box {
+      margin-top: 20px;
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    body.dark .preview-box {
+      border-color: #555;
+    }
+  </style>
+</head>
+<body class="light">
+
+  <div class="container">
+    <h2 id="title">User Preference System</h2>
+
+    <div class="form-group">
+      <label for="language">Select Language</label>
+      <select id="language">
+        <option value="">Choose language</option>
+        <option value="en">English</option>
+        <option value="hi">Hindi</option>
+        <option value="fr">French</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="theme">Select Theme</label>
+      <select id="theme">
+        <option value="">Choose theme</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+    </div>
+
+    <button onclick="savePreferences()">Save Preferences</button>
+
+    <div class="message" id="message"></div>
+
+    <div class="preview-box">
+      <p><strong>Current Language:</strong> <span id="currentLanguage">-</span></p>
+      <p><strong>Current Theme:</strong> <span id="currentTheme">-</span></p>
+      <p id="welcomeText">Welcome!</p>
+    </div>
+  </div>
+
+  <script>
+    function savePreferences() {
+      const language = document.getElementById("language").value;
+      const theme = document.getElementById("theme").value;
+
+      if (language === "" || theme === "") {
+        document.getElementById("message").innerText = "⚠️ Please select language and theme.";
+        return;
+      }
+
+      localStorage.setItem("preferredLanguage", language);
+      localStorage.setItem("preferredTheme", theme);
+
+      applyPreferences();
+      document.getElementById("message").innerText = "✅ Preferences saved successfully!";
+    }
+
+    function applyPreferences() {
+      const savedLanguage = localStorage.getItem("preferredLanguage");
+      const savedTheme = localStorage.getItem("preferredTheme");
+
+      if (savedLanguage) {
+        document.getElementById("language").value = savedLanguage;
+        updateLanguage(savedLanguage);
+      }
+
+      if (savedTheme) {
+        document.getElementById("theme").value = savedTheme;
+        document.body.className = savedTheme;
+        document.getElementById("currentTheme").innerText =
+          savedTheme.charAt(0).toUpperCase() + savedTheme.slice(1);
+      }
+    }
+
+    function updateLanguage(language) {
+      let langText = "";
+      let welcomeMessage = "";
+
+      if (language === "en") {
+        langText = "English";
+        welcomeMessage = "Welcome!";
+      } else if (language === "hi") {
+        langText = "Hindi";
+        welcomeMessage = "स्वागत है!";
+      } else if (language === "fr") {
+        langText = "French";
+        welcomeMessage = "Bienvenue !";
+      }
+
+      document.getElementById("currentLanguage").innerText = langText;
+      document.getElementById("welcomeText").innerText = welcomeMessage;
+    }
+
+    window.onload = applyPreferences;
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,148 @@
+:root {
+  --bg: #f8f9fa;
+  --text: #212529;
+  --card: #ffffff;
+  --muted: #6c757d;
+  --accent: #0d6efd;
+}
+
+body.dark-mode {
+  --bg: #121212;
+  --text: #f8f9fa;
+  --card: #1e1e1e;
+  --muted: #adb5bd;
+  --accent: #66b2ff;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.navbar,
+.modal-content,
+.offcanvas,
+.dropdown-menu,
+.list-group-item,
+.accordion-item {
+  background-color: var(--card) !important;
+  color: var(--text) !important;
+}
+
+.card,
+.form-control,
+.form-select,
+textarea,
+.table,
+.alert,
+.toast,
+footer {
+  background-color: var(--card);
+  color: var(--text);
+}
+
+.form-control,
+.form-select {
+  border-color: rgba(108, 117, 125, 0.35);
+}
+
+.hero {
+  background: linear-gradient(135deg, rgba(13, 110, 253, 0.12), rgba(25, 135, 84, 0.08));
+  border-radius: 1.5rem;
+  padding: 4rem 2rem;
+}
+
+.hero-img {
+  max-height: 380px;
+  object-fit: cover;
+  border-radius: 1rem;
+  width: 100%;
+}
+
+.section-title {
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.product-card {
+  height: 100%;
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.product-card img {
+  height: 220px;
+  object-fit: contain;
+  padding: 1rem;
+}
+
+.price-tag {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.category-badge {
+  text-transform: capitalize;
+}
+
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.65);
+  backdrop-filter: blur(2px);
+  z-index: 2000;
+}
+
+body.dark-mode .loading-overlay {
+  background: rgba(0,0,0,0.45);
+}
+
+.back-to-top {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 1100;
+  display: none;
+}
+
+.back-to-top.show {
+  display: inline-flex;
+}
+
+.cart-item-img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+}
+
+.footer-link {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  color: var(--accent);
+}
+
+.rating-stars {
+  color: #ffc107;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.small-muted {
+  color: var(--muted);
+  font-size: 0.92rem;
+}

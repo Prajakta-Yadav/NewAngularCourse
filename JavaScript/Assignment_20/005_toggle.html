@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Theme Toggle with localStorage</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      transition: 0.3s;
+    }
+
+    .light-mode {
+      background-color: white;
+      color: black;
+    }
+
+    .dark-mode {
+      background-color: #222;
+      color: white;
+    }
+
+    button {
+      padding: 10px 15px;
+      cursor: pointer;
+      border: none;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body class="light-mode">
+
+  <h2>Dark / Light Theme Toggle</h2>
+  <button onclick="toggleTheme()">Toggle Theme</button>
+
+  <script>
+    // Load saved theme on page load
+    window.onload = function () {
+      let savedTheme = localStorage.getItem("theme");
+
+      if (savedTheme) {
+        document.body.className = savedTheme;
+      }
+    };
+
+    // Toggle theme and save in localStorage
+    function toggleTheme() {
+      if (document.body.classList.contains("light-mode")) {
+        document.body.className = "dark-mode";
+        localStorage.setItem("theme", "dark-mode");
+      } else {
+        document.body.className = "light-mode";
+        localStorage.setItem("theme", "light-mode");
+      }
+    }
+  </script>
+
+</body>
+</html>

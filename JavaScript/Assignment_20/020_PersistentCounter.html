@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Counter App</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f7fb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      font-size: 40px;
+      margin: 20px 0;
+    }
+
+    button {
+      padding: 10px 15px;
+      margin: 5px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
+      font-size: 16px;
+    }
+
+    .inc { background: #28a745; }
+    .dec { background: #007bff; }
+    .reset { background: #dc3545; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>🔢 Counter App</h2>
+
+  <h1 id="counter">0</h1>
+
+  <button class="inc" onclick="increment()">➕ Increment</button>
+  <button class="dec" onclick="decrement()">➖ Decrement</button>
+  <button class="reset" onclick="resetCounter()">🔄 Reset</button>
+</div>
+
+<script>
+  let count = 0;
+
+  // Load stored value on page load
+  function loadCounter() {
+    let saved = localStorage.getItem("counter");
+
+    if (saved !== null) {
+      count = parseInt(saved);
+    }
+
+    updateDisplay();
+  }
+
+  function updateDisplay() {
+    document.getElementById("counter").innerText = count;
+  }
+
+  function increment() {
+    count++;
+    saveCounter();
+  }
+
+  function decrement() {
+    count--;
+    saveCounter();
+  }
+
+  function resetCounter() {
+    count = 0;
+    saveCounter();
+  }
+
+  function saveCounter() {
+    localStorage.setItem("counter", count);
+    updateDisplay();
+  }
+
+  window.onload = loadCounter;
+</script>
+
+</body>
+</html>

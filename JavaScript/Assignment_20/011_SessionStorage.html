@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Validation</title>
+</head>
+<body>
+
+  <h2>Login Form</h2>
+
+  <input type="text" id="username" placeholder="Enter username"><br><br>
+  <input type="password" id="password" placeholder="Enter password"><br><br>
+
+  <button onclick="login()">Login</button>
+  <button onclick="logout()">Logout</button>
+
+  <p id="status"></p>
+
+  <script>
+    const validUsername = "admin";
+    const validPassword = "1234";
+
+    function login() {
+      let username = document.getElementById("username").value.trim();
+      let password = document.getElementById("password").value.trim();
+
+      // Do not allow empty input
+      if (username === "" || password === "") {
+        document.getElementById("status").innerText =
+          "⚠️ Please enter username and password!";
+        return;
+      }
+
+      // Check credentials
+      if (username === validUsername && password === validPassword) {
+        sessionStorage.setItem("isLoggedIn", "true");
+        sessionStorage.setItem("username", username);
+
+        document.getElementById("status").innerText =
+          "✅ Login successful!";
+      } else {
+        document.getElementById("status").innerText =
+          "❌ Invalid username or password!";
+      }
+    }
+
+    function logout() {
+      let isLoggedIn = sessionStorage.getItem("isLoggedIn");
+
+      // Prevent logout before login
+      if (isLoggedIn !== "true") {
+        document.getElementById("status").innerText =
+          "⚠️ Please login first!";
+        return;
+      }
+
+      sessionStorage.clear();
+
+      document.getElementById("status").innerText =
+        "👋 Logged out successfully!";
+    }
+  </script>
+
+</body>
+</html>

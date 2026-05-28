@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Session Cart</title>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+      background: #f5f7fa;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    input, button {
+      padding: 8px;
+      margin: 5px 0;
+      width: 100%;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      color: white;
+    }
+
+    .add-btn { background: #4CAF50; }
+    .buy-btn { background: #2196F3; }
+    .clear-btn { background: #f44336; }
+    .remove-btn {
+      background: red;
+      width: auto;
+      margin-left: 10px;
+    }
+
+    li {
+      margin: 8px 0;
+      padding: 8px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    #message {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>🛒 Session Cart</h2>
+
+  <input type="text" id="itemName" placeholder="Enter item name">
+  <input type="number" id="itemPrice" placeholder="Enter price">
+
+  <button class="add-btn" onclick="addItem()">Add to Cart</button>
+
+  <ul id="cartList"></ul>
+
+  <h3 id="total">Total: ₹0</h3>
+
+  <button class="buy-btn" onclick="buyItems()">Buy Items</button>
+  <button class="clear-btn" onclick="clearCart()">Clear Cart</button>
+
+  <p id="message"></p>
+</div>
+
+<script>
+  function getCart() {
+    return JSON.parse(sessionStorage.getItem("cart")) || [];
+  }
+
+  function saveCart(cart) {
+    sessionStorage.setItem("cart", JSON.stringify(cart));
+  }
+
+  function addItem() {
+    let name = document.getElementById("itemName").value.trim();
+    let price = document.getElementById("itemPrice").value;
+
+    if (name === "" || price === "") {
+      document.getElementById("message").innerText = "⚠️ Enter valid item details!";
+      return;
+    }
+
+    let cart = getCart();
+
+    cart.push({ name: name, price: parseFloat(price) });
+
+    saveCart(cart);
+
+    document.getElementById("itemName").value = "";
+    document.getElementById("itemPrice").value = "";
+
+    document.getElementById("message").innerText = "✅ Item added!";
+    displayCart();
+  }
+
+  function displayCart() {
+    let cart = getCart();
+    let list = document.getElementById("cartList");
+    let total = 0;
+
+    list.innerHTML = "";
+
+    cart.forEach((item, index) => {
+      total += item.price;
+
+      let li = document.createElement("li");
+      li.innerHTML = `
+        ${item.name} - ₹${item.price}
+        <button class="remove-btn" onclick="removeItem(${index})">❌</button>
+      `;
+      list.appendChild(li);
+    });
+
+    document.getElementById("total").innerText = "Total: ₹" + total;
+  }
+
+  function removeItem(index) {
+    let cart = getCart();
+    cart.splice(index, 1);
+    saveCart(cart);
+
+    document.getElementById("message").innerText = "🗑️ Item removed!";
+    displayCart();
+  }
+
+  function clearCart() {
+    sessionStorage.removeItem("cart");
+    document.getElementById("message").innerText = "🧹 Cart cleared!";
+    displayCart();
+  }
+
+  // 🛒 Buy Items
+  function buyItems() {
+    let cart = getCart();
+
+    if (cart.length === 0) {
+      document.getElementById("message").innerText = "⚠️ Cart is empty!";
+      return;
+    }
+
+    document.getElementById("message").innerText =
+      "💳 Payment successful! Your order is placed.";
+
+    console.log("Order placed:", cart);
+
+    // Clear cart after purchase
+    sessionStorage.removeItem("cart");
+    displayCart();
+  }
+
+  window.onload = displayCart;
+</script>
+
+</body>
+</html>

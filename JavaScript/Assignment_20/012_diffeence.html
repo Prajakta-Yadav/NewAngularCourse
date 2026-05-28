@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>localStorage vs sessionStorage</title>
+</head>
+<body>
+
+  <h2>Compare localStorage and sessionStorage</h2>
+
+  <input type="text" id="userData" placeholder="Enter some data"><br><br>
+
+  <button onclick="saveData()">Save in Both</button>
+  <button onclick="showData()">Show Data</button>
+  <button onclick="clearData()">Clear Data</button>
+
+  <p id="output"></p>
+
+  <script>
+    function saveData() {
+      let data = document.getElementById("userData").value.trim();
+
+      if (data === "") {
+        document.getElementById("output").innerText = "⚠️ Please enter some data!";
+        return;
+      }
+
+      localStorage.setItem("myData", data);
+      sessionStorage.setItem("myData", data);
+
+      document.getElementById("output").innerText =
+        "✅ Data saved in both localStorage and sessionStorage";
+    }
+
+    function showData() {
+      let localValue = localStorage.getItem("myData");
+      let sessionValue = sessionStorage.getItem("myData");
+
+      document.getElementById("output").innerHTML =
+        "localStorage: " + (localValue || "No data") + "<br>" +
+        "sessionStorage: " + (sessionValue || "No data");
+    }
+
+    function clearData() {
+      localStorage.removeItem("myData");
+      sessionStorage.removeItem("myData");
+
+      document.getElementById("output").innerText =
+        "🗑️ Data cleared from both storages";
+    }
+  </script>
+
+</body>
+</html>

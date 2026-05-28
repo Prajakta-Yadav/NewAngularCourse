@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Project 3</p>
+      <h1>Product Dashboard</h1>
+    </div>
+    <div class="topbar-actions">
+      <button id="themeToggle" class="ghost-btn" aria-label="Toggle theme">🌙 Theme</button>
+      <button id="cartToggle" class="primary-btn cart-btn" aria-label="Open cart">
+        🛒 Cart <span id="cartCount" class="badge">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="filters-card">
+      <h2>Filters</h2>
+      <label class="field">
+        <span>Search</span>
+        <input type="search" id="searchInput" placeholder="Search products..." />
+      </label>
+
+      <label class="field">
+        <span>Sort By</span>
+        <select id="sortSelect">
+          <option value="default">Default</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="title-asc">Name: A to Z</option>
+          <option value="title-desc">Name: Z to A</option>
+          <option value="rating-desc">Rating</option>
+        </select>
+      </label>
+
+      <label class="field">
+        <span>Category</span>
+        <select id="categorySelect">
+          <option value="all">All Categories</option>
+        </select>
+      </label>
+
+      <label class="field checkbox-row">
+        <input type="checkbox" id="inStockOnly" />
+        <span>Only products rated 4.0+</span>
+      </label>
+
+      <div class="stats-box">
+        <p><strong id="productCount">0</strong> products shown</p>
+        <p><strong id="cartTotal">$0.00</strong> cart total</p>
+      </div>
+
+      <button id="resetFilters" class="ghost-btn full-width">Reset Filters</button>
+    </aside>
+
+    <section class="content-area">
+      <section class="notices">
+        <div>
+          <p class="eyebrow">Live Feed</p>
+          <h2>Featured Notices</h2>
+        </div>
+        <div id="noticeBoard" class="notice-board"></div>
+      </section>
+
+      <section>
+        <div class="section-header">
+          <h2>Products</h2>
+          <button id="retryButton" class="ghost-btn hidden">Retry</button>
+        </div>
+
+        <div id="loadingState" class="state-card">
+          <div class="spinner"></div>
+          <p>Loading products...</p>
+        </div>
+
+        <div id="errorState" class="state-card hidden">
+          <p>Unable to fetch products right now.</p>
+        </div>
+
+        <div id="emptyState" class="state-card hidden">
+          <p>No products match your current filters.</p>
+        </div>
+
+        <div id="productGrid" class="product-grid"></div>
+      </section>
+    </section>
+  </main>
+
+  <aside id="cartDrawer" class="cart-drawer" aria-hidden="true">
+    <div class="cart-header">
+      <h2>Your Cart</h2>
+      <button id="closeCart" class="ghost-btn">✕</button>
+    </div>
+    <div id="cartItems" class="cart-items"></div>
+    <div class="cart-footer">
+      <p>Total: <strong id="drawerTotal">$0.00</strong></p>
+      <div class="cart-actions">
+        <button id="clearCart" class="ghost-btn full-width">Clear Cart</button>
+      </div>
+    </div>
+  </aside>
+
+  <div id="overlay" class="overlay hidden"></div>
+
+  <dialog id="productModal" class="product-modal">
+    <button id="closeModal" class="modal-close">✕</button>
+    <div id="modalContent"></div>
+  </dialog>
+
+  <template id="productCardTemplate">
+    <article class="product-card">
+      <img class="product-image" alt="" />
+      <div class="product-body">
+        <span class="product-category"></span>
+        <h3 class="product-title"></h3>
+        <p class="product-description"></p>
+        <div class="product-meta">
+          <span class="product-price"></span>
+          <span class="product-rating"></span>
+        </div>
+        <div class="product-actions">
+          <button class="ghost-btn details-btn">Details</button>
+          <button class="primary-btn add-btn">Add to Cart</button>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
